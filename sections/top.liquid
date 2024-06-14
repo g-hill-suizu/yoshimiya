@@ -1,0 +1,497 @@
+<div class="bg-filter"><img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/bg_img.jpg" alt=""></div>   
+<!--メインビジュアル-->
+    <div class="p-top_mv">
+        <div class="c-txt">
+        <h1 class="catchcopy">沖縄の良味、<br>あがってます<div class="border"></div></h1>
+        </div><!-- /.c-txt -->
+        <div class="img-box obj-fit">
+        <div class="swiper">
+            <div class="swiper-wrapper">
+            <div class="swiper-slide mv01">
+                <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/mv01.jpg" alt="">    
+            </div>
+            <div class="swiper-slide mv02">
+                <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/mv02.jpg" alt="">
+            </div>
+            <div class="swiper-slide mv03">
+                <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/mv03.jpg" alt="">
+            </div>
+            <div class="swiper-slide mv04">
+                <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/mv04.jpg" alt="">
+            </div>
+            <div class="swiper-slide mv05">
+                <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/mv05.jpg" alt="">
+            </div>
+            <div class="swiper-slide mv06">
+                <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/mv06.jpg" alt="">
+            </div>
+            </div><!-- /.swiper-wrapper -->
+        </div><!-- /.swiper -->
+    </div>
+    </div><!-- /.p-top_mv -->
+
+    <div class="scroll_txt scroll over">
+    <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/madeinokinawa.svg" alt="MADE in OKINAWA" class="scroll_img">   
+    </div>
+
+    <div class="scroll_bar over">
+    <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/fv_line.svg" alt="">
+    </div>
+
+    <div class="mv_txt">
+    <p>Yoshimiya Online Store</p>
+    </div>
+
+    {% comment %} <div class="banner over fadeInTriger">
+    <a href="#">
+    <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/banner_dammy.jpg" alt="">
+    </a>
+    </div> {% endcomment %}
+
+    {% for block in section.blocks %}
+        {% if block.type == 'banner-top01' %}
+        <div class="banner over fadeInTriger">
+        <a href="{{ block.settings.link_banner }}">
+            <img src="{{ block.settings.image_banner | img_url: 'master' }}" alt="">
+        </a>
+        </div>
+    {% endif %}
+    {% endfor %}
+
+    <section class="about over">
+    <div class="about_bg">
+    <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/noren.png" alt="良味屋">
+    </div>
+    <div class="about_bg_sp">
+    <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/noren_sp.png" alt="良味屋">
+    </div>
+
+    <div class="inner">
+    <div class="yoshimiya_left">
+        <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/about_yoshimiya.svg" alt="About Yoshimiya">
+    </div>
+    <div class="yoshimiya_right">
+        <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/about_yoshimiya_right.svg" alt="About Yoshimiya">
+    </div>
+
+
+        <div class="about_inner fadeInTriger">
+        <h3>沖縄のお菓子屋さんが、<br>
+            自信を持っておすすめする琉球銘菓</h3>
+        <p class="about_txt_sp">About Yoshimiya</p>
+        <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+        <div class="btn about_btn">
+            <a href="about.html" class="btn_txt">良味屋について
+            <svg id="_レイヤー_1" data-name="レイヤー 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.17 5.33">
+                <defs>
+                <style>
+                    .cls-1 {
+                    fill: #010642;
+                    stroke-width: 0px;
+                    }
+                </style>
+                </defs>
+                <path class="cls-1" d="M.5,2.17c-.28,0-.5.22-.5.5s.22.5.5.5v-1ZM8.83,2.67c0,1.47,1.19,2.67,2.67,2.67s2.67-1.19,2.67-2.67-1.19-2.67-2.67-2.67-2.67,1.19-2.67,2.67ZM.5,3.17h11v-1H.5v1Z"/>
+            </svg>
+            </a>
+        </div>
+        </div>
+    </div>
+    <div class="separator">
+        <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/separator.png" alt="">
+    </div>
+    </section>
+
+    <section class="wrapper recommend over">
+    <div class="bg_img"></div>
+    <div class="bg_img_2"></div>
+    <div class="inner fadeInTriger">
+        <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/title_deco.svg" alt="">
+        <h2>良味屋店長おすすめ</h2>
+        <p class="sub_title">Recommend</p>
+        <div class="x_scroll" data-simplebar>
+        <ul class="list_area">
+
+          {% for product in collections.all.products limit:5%}
+            <li>
+                <a href="#" class="r_list">
+                    <div class="img_box obj-fit"><img src="{{ product.featured_image.src | img_url: 'master' }}" alt=""></div>
+                    <p class="cate_name">
+                        {% for collection in product.collections %}
+                        {% assign excluded_collections = 'all' | split: ',' %}
+                        {% unless excluded_collections contains collection.handle %}
+                            {{ collection.title }}
+                        {% endunless %}
+                        {% endfor %}
+                    </p>
+                    <p class="item_text">{{ product.title }}</p>
+                    <p class="item_text">{{ product.price | money }}円<span>(税込)</span></p>
+                </a>
+                <div class="recommend_btn">
+                  <button type="button" class="add-to-cart-btn cart-btn" data-product-id="{{ product.variants.first.id }}" data-stock-quantity="{{ product.variants.first.inventory_quantity }}">
+                      <svg id="_layer_1" data-name="layer1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22.5 22.5">
+                      <defs>
+                          <style>
+                          .cls-1 {
+                              fill: #010642;
+                              stroke-width: 0px;
+                          }
+                          </style>
+                      </defs>
+                      <path class="cls-1" d="M18,18c.6,0,1.17.24,1.59.66.42.42.66.99.66,1.59s-.24,1.17-.66,1.59c-.42.42-.99.66-1.59.66s-1.17-.24-1.59-.66c-.42-.42-.66-.99-.66-1.59,0-1.25,1-2.25,2.25-2.25ZM0,0h3.68l1.06,2.25h16.64c.3,0,.58.12.8.33.21.21.33.5.33.8,0,.19-.06.38-.14.56l-4.03,7.28c-.38.69-1.12,1.16-1.97,1.16H7.99l-1.01,1.83-.03.14c0,.07.03.15.08.2.05.05.12.08.2.08h13.03v2.25H6.75c-.6,0-1.17-.24-1.59-.66-.42-.42-.66-.99-.66-1.59,0-.39.1-.76.27-1.08l1.53-2.76L2.25,2.25H0V0ZM6.75,18c.6,0,1.17.24,1.59.66.42.42.66.99.66,1.59s-.24,1.17-.66,1.59c-.42.42-.99.66-1.59.66s-1.17-.24-1.59-.66c-.42-.42-.66-.99-.66-1.59,0-1.25,1-2.25,2.25-2.25ZM16.88,10.13l3.13-5.63H5.78l2.66,5.63h8.44Z"/>
+                      </svg>
+                      カートに入れておく
+                  </button>
+                  <p class="success" style="display: none;">商品がカートに追加されました</p>
+                  <p class="error" style="display: none;">商品の追加に失敗しました。</p>
+              </div>
+            </li>
+          {% endfor %}
+
+            <script>
+              document.addEventListener('DOMContentLoaded', function() {
+                var addToCartButton = document.querySelector('.add-to-cart-btn'); // カートに追加ボタンを取得
+                var quantityInput = document.getElementById('quantity'); // 数量入力フィールドを取得
+                var successMessage = document.querySelector('.success');// 成功時のテキスト要素を取得
+                var errorMessage = document.querySelector('.error');// 失敗時のテキスト要素を取得
+
+                addToCartButton.addEventListener('click', function() {
+                  var productId = this.getAttribute('data-product-id');// バリアントIDをbuttonタグのdata属性から取得
+                  var stockQuantity = parseInt(this.getAttribute('data-stock-quantity'), 10); // 在庫数をbuttonタグのdata属性から取得
+                  var quantity = parseInt(quantityInput.value, 10) || 1;// 入力された数量を整数に変換、デフォルトは１とする
+
+                  if (quantity > stockQuantity) {
+                    // 在庫数を超える数量が選択された場合
+                    successMessage.style.display = 'none';
+                    errorMessage.style.display = 'block';
+                    errorMessage.textContent = '在庫が不足しています。';
+                    return; // ここで処理を中断
+                  }
+
+                  // ShopifyのカートAPIが要求するデータフォーマットでリクエストするための準備
+                  var requestData = {
+                    items: [{
+                      id: productId, // どの商品をカートへ追加するのか
+                      quantity: quantity // 何個追加するのか
+                    }]
+                  };
+                  //上記をfetchAPIを使用して非同期的にサーバーリクエストを送信する
+                  fetch('/cart/add.js', { 
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json' 
+                    },
+                    body: JSON.stringify(requestData) //requestDataオブジェクトをJSON文字列に変換する
+                  })
+                  .then(response => {
+                    if (response.ok) {
+                      // 商品がカートに追加された場合
+                      successMessage.style.display = 'block'; // 成功メッセージを表示
+                      errorMessage.style.display = 'none'; // エラーメッセージを非表示
+                      // 成功メッセージを数秒後に自動で非表示にする
+                      setTimeout(function() {
+                        successMessage.style.display = 'none';
+                      }, 3000);
+                    } else {
+                      // 商品の追加に失敗した場合
+                      successMessage.style.display = 'none'; // 成功メッセージを非表示
+                      errorMessage.style.display = 'block'; // エラーメッセージを表示
+                      errorMessage.textContent = '商品の追加に失敗しました。';
+                    }
+                  })
+                  .catch(error => {
+                    console.error('エラーが発生しました。', error);
+                    // エラーが発生した場合
+                    successMessage.style.display = 'none'; // 成功メッセージを非表示
+                    errorMessage.style.display = 'block'; // エラーメッセージを表示
+                    errorMessage.textContent = '商品の追加に失敗しました。';
+                  });
+                });
+              });
+            </script>
+
+            {% comment %} <div class="cart-btn-wrapper" style="margin-bottom: 2rem;">
+            {% if product.variants.size > 1 %}
+                <button type="button" class="add-to-cart-btn cart-btn" data-product-id="" data-stock-quantity="">カートに追加</button>
+            {% else %}
+                <button type="button" class="add-to-cart-btn cart-btn" data-product-id="{{ product.variants.first.id }}" data-stock-quantity="{{ product.variants.first.inventory_quantity }}">カートに追加</button>
+            {% endif %}
+            <p class="success" style="display: none;">商品がカートに追加されました</p>
+            <p class="error" style="display: none;">商品の追加に失敗しました。</p>
+            </div>
+
+            {% for product in collections.all.products %}
+                <div class="item-card swiper-slide fadeIn">
+                  <a class="h-scale" href="{{ product.url }}">
+                    <div class="img-box"><img src="{{ product.featured_image.src | img_url: 'master' }}" alt=""></div>
+                    <p class="cate">
+                      {% for collection in product.collections %}
+                        {% assign excluded_collections = 'all,tax' | split: ',' %}
+                        {% unless excluded_collections contains collection.handle %}
+                          {{ collection.title }}
+                        {% endunless %}
+                      {% endfor %}
+                    </p>
+                    <p class="name">{{ product.title }}</p>
+                    <p class="price">{{ product.price | money }}円(税込)</p>
+                  </a>
+                  <div class="add-cart">
+                    <form action="/cart/add" method="post">
+                      <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+                      <input type="hidden" name="quantity" value="1">
+                      <button type="submit">カートに入れる</button>
+                    </form>
+                  </div>
+                </div><!-- /.item-card -->
+              {% endfor %} {% endcomment %}
+          </ul>
+        </div>
+        
+        <div class="btn product_listbtn">
+        <a href="#" class="btn_txt">商品一覧
+            <svg id="_layer_1" data-name="layer1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.17 5.33">
+            <defs>
+                <style>
+                .cls-1 {
+                    fill: #010642;
+                    stroke-width: 0px;
+                }
+                </style>
+            </defs>
+            <path class="cls-1" d="M.5,2.17c-.28,0-.5.22-.5.5s.22.5.5.5v-1ZM8.83,2.67c0,1.47,1.19,2.67,2.67,2.67s2.67-1.19,2.67-2.67-1.19-2.67-2.67-2.67-2.67,1.19-2.67,2.67ZM.5,3.17h11v-1H.5v1Z"/>
+            </svg>
+        </a>
+        </div>
+    </div>
+    </section>
+
+    <!--category-->
+    <section class="wrapper category">
+    <div class="inner over fadeInTriger">
+        <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/title_deco.svg" alt="">
+        <h2>カテゴリ</h2>
+        <p class="sub_title">Category</p>
+
+        <ul class="list_item">
+        <li>
+            <a href="#" class="category_list">
+            <div class="card_img obj-fit">
+                <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/cate01.jpg" alt="" class="cate_pc">
+                <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/cate01_sp.jpg" alt="" class="cate_sp">
+            </div>
+            <p class="cate_text">さーたーあんだぎー</p>
+            </a>
+        </li>
+        <li>
+            <a href="#" class="category_list">
+            <div class="card_img obj-fit">
+                <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/cate02.jpg" alt="" class="cate_pc">
+                <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/cate02_sp.jpg" alt="" class="cate_sp">
+            </div>
+            <p class="cate_text ">ちんすこう</p>
+            </a>
+        </li>
+
+        <li>
+            <a href="#" class="category_list">
+            <div class="card_img obj-fit">
+                <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/cate03.jpg" alt="" class="cate_pc">
+                <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/cate03_sp.jpg" alt="" class="cate_sp">
+            </div>
+            <p class="cate_text">黒糖/黒糖菓子</p>
+            </a>
+        </li>
+
+        <li>
+            <a href="#" class="category_list">
+            <div class="card_img obj-fit">
+                <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/cate04.jpg" alt="" class="cate_pc">
+                <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/cate04_sp.jpg" alt="" class="cate_sp">
+            </div>
+            <p class="cate_text">ギフト</p>
+            </a>
+        </li>
+
+        <li>
+            <a href="#" class="category_list">
+            <div class="card_img obj-fit">
+                <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/cate05.jpg" alt="" class="cate_pc">
+                <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/cate05_sp.jpg" alt="" class="cate_sp">
+            </div>
+            <p class="cate_text two_lines">店長の推し！<br class="br_390">THE 沖縄</p>
+            </a>
+        </li>
+
+        <li>
+            <a href="#" class="category_list">
+            <div class="card_img obj-fit">
+                <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/cate06.jpg" alt="" class="cate_pc">
+                <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/cate06_sp.jpg" alt="" class="cate_sp">
+            </div>
+            <p class="cate_text">その他</p>
+            </a>
+        </li>
+        </ul>
+
+
+    <div class="btn product_listbtn">
+    <a href="#" class="btn_txt">商品一覧
+        <svg id="_layer_1" data-name="layer1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.17 5.33">
+        <defs>
+            <style>
+            .cls-1 {
+                fill: #010642;
+                stroke-width: 0px;
+            }
+            </style>
+        </defs>
+        <path class="cls-1" d="M.5,2.17c-.28,0-.5.22-.5.5s.22.5.5.5v-1ZM8.83,2.67c0,1.47,1.19,2.67,2.67,2.67s2.67-1.19,2.67-2.67-1.19-2.67-2.67-2.67-2.67,1.19-2.67,2.67ZM.5,3.17h11v-1H.5v1Z"/>
+        </svg>
+    </a>
+    </div>
+    </div>
+    <div class="separator">
+    <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/separator.png" alt="">
+    </div>
+    </section>
+
+    <section class="wholesale over">
+    <div class="inner wholesale_inner">
+    <h2>ロットでご注文・<br class="sp">卸希望の方はこちら</h2>
+    <div class="btn wholesale_btn">
+        <a href="about.html" class="wholesale_txt">卸希望の方へ
+        <svg id="_レイヤー_1" data-name="レイヤー 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.17 5.33">
+            <defs>
+            <style>
+                .cls-1 {
+                fill: #fff;
+                stroke-width: 0px;
+                }
+            </style>
+            </defs>
+            <path class="cls-1" d="M.5,2.17c-.28,0-.5.22-.5.5s.22.5.5.5v-1ZM8.83,2.67c0,1.47,1.19,2.67,2.67,2.67s2.67-1.19,2.67-2.67-1.19-2.67-2.67-2.67-2.67,1.19-2.67,2.67ZM.5,3.17h11v-1H.5v1Z"/>
+        </svg>
+        </a>
+    </div>
+    </div>
+    <div class="separator">
+    <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/separator.png" alt="">
+    </div>
+    </section>
+
+<!--topics-->
+<section class="topics over">
+    <div class="topics_bg_motif"></div>
+    <div class="topics_bg_motif_2"></div>
+    <div class="inner topicswrapper">
+        <div class="topics_wrap">
+            <div class="title_wrap">
+            <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/title_deco.svg" alt="">
+                <h2>良味屋だより</h2>
+                <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/topics.svg" alt="Topics" class="sub_img">
+            </div>
+            <div class="myswiper_wrapper">
+                <div class="swiper02">
+                    <div class="swiper-wrapper">
+                        {% assign blog_handle = 'news' %}
+                        {% assign latest_posts = blogs[blog_handle].articles | slice: 0, 5 %}
+                        {% for article in blogs['news'].articles %}
+                        <div class="swiper-slide">
+                            <a href="{{ article.url }}">
+                                <div class="thumn-box obj-fit">
+                                        <img src="{{ article.image.src | img_url: 'master' }}" alt="{{ article.image.alt }}">
+                                    </div>
+                                    <div class="cate">
+                                    <p>{{ article.tags | join: ', ' }}</p> <!-- 最初のタグを表示します。 -->
+                                    </div>
+                                    <div class="date">
+                                    <p>{{ article.published_at | date: '%Y.%m.%d' }}</p>
+                                    </div>
+                                    <div class="ttl">
+                                    <p>{{ article.title }}</p>
+                                </div>
+                            </a>
+                            </div>
+                        {% endfor %}
+                        
+                    </div><!--swiper_wrapper-->
+                </div><!--swiper02-->
+            </div><!--myswiper_wrapper-->
+        </div><!--topics_wrap-->
+        <div class="btn topics_btn">
+            <a href="news.html" class="btn_txt">良味屋だより一覧
+                <svg id="_layer_1" data-name="layer1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.17 5.33">
+                <defs>
+                <style>
+                    .cls-1 {
+                    fill: #010642;
+                    stroke-width: 0px;
+                    }
+                </style>
+                </defs>
+                <path class="cls-1" d="M.5,2.17c-.28,0-.5.22-.5.5s.22.5.5.5v-1ZM8.83,2.67c0,1.47,1.19,2.67,2.67,2.67s2.67-1.19,2.67-2.67-1.19-2.67-2.67-2.67-2.67,1.19-2.67,2.67ZM.5,3.17h11v-1H.5v1Z"/>
+                </svg>
+            </a>
+        </div><!--btn topics_btn-->
+        <!-- スクロールバー -->
+        <div class="swiper-scrollbar"></div>
+    </div>
+    <div class="topics_bg_img obj-fit">
+        <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/topics_img.png" alt="">
+    </div>
+</section>
+
+<!--footer直前のリンク-->
+<div class="link over fadeInTriger">
+    <div class="bg_img"></div>
+    <div class="bg_img_2"></div>
+    <div class="inner link_wrap over">
+        <ul class="link_item">
+            <li>
+            <a href="faq.html#order_payment" class="link_list">
+                <p class="link_text">注文・支払い<br class="mb">について</p>
+            </a>
+            </li>
+            <li>
+            <a href="faq.html#shipping_cost" class="link_list">
+                <p class="link_text">配送・送料<br class="mb">について</p>
+            </a>
+            </li>
+
+            <li>
+            <a href="faq.html#return_exchange" class="link_list">
+                <p class="link_text">返品・交換<br class="mb">について</p>
+            </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+{% schema %}
+    {
+    "name": "toppage",
+    "presets": [
+    {
+        "name": "toppage"
+    }
+    ],
+    "blocks": [
+    {
+    "type": "banner-top01",
+    "name": "FV下バナー",
+    "settings": [
+        {
+        "type": "image_picker",
+        "id": "image_banner",
+        "label": "画像"
+        },
+        {
+        "type": "url",
+        "id": "link_banner",
+        "label": "リンク"
+        }
+    ]
+    }
+]
+}
+{% endschema %}

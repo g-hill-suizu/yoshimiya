@@ -1,0 +1,48 @@
+{% assign recommend_item = product.metafields.custom._recommend %}
+{%-  if recommend_item != blank -%}
+
+<div class="separator productsepa over_2">
+    <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/separator.png" alt="">
+</div>
+
+<section class="wrapper p_recommend recommend over_2">
+    <div class="inner">
+        <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/title_deco.svg" alt="">
+        <h2>こちらもおすすめ</h2>
+        <ul class="list_area list_wrap">
+        {%- for product in recommend_item.value  -%}    
+            <li>
+                <a href="{{ product.url }}">
+                    <div class="img_box obj-fit"><img src="{{ product.featured_image.src | img_url: 'master' }}" alt=""></div>
+                    <p class="cate_name"> 
+                        {% for collection in product.collections %}
+                        {% assign excluded_collections = 'all,tax' | split: ',' %}
+                        {% unless excluded_collections contains collection.handle %}
+                        {{ collection.title }}
+                        {% endunless %}
+                        {% endfor %}
+                    </p>
+                    <p class="item_text">{{ product.title }}</p>
+                    <p class="item_text">{{ product.price | money }}円<span>(税込)</span></p>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+{%- endif -%}
+
+{% render 'under-blocks' %}
+
+
+
+{% schema %}
+    {
+    "name": "products-detail02",
+    "presets": [
+    {
+        "name": "products-detail02"
+    }
+    ]
+}
+{% endschema %}

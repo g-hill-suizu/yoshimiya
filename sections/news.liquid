@@ -1,0 +1,110 @@
+<div class="bg-filter"><img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/bg_img.jpg" alt=""></div>   
+<!--メインビジュアル-->
+<div class="p-top_mv under_mv_img_wrap over_2 obj-fit">
+    <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/topics_mv.png" alt="" class="under_mv_img">
+    <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/topics_mv_sp.png" alt="" class="under_mv_img_sp">
+    <div class="title_circle"><img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/title_bg_circle.png" alt=""></div>
+    <div class="under_page_title_wrap">
+        <h2>良味屋だより</h2>
+        <p class="subtitle">Topics</p>
+    </div>
+</div>
+
+<section class="news_inner">
+    <div class="bg-filter"><img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/bg_img.jpg" alt=""></div>
+    <div class="under_bg"></div>
+    <div class="under_bg_2"></div>
+    <div class="under_bg_3"></div>
+    <div class="under_bg_4"></div>
+    <div class="under_bg_5"></div>
+    <div class="under_bg_6"></div> 
+
+    <div class="inner over_2">
+        <div class="p-order-content">
+            <!-- <p>全4件</p> -->
+            <p class="u-pc">カテゴリ：</p>
+            <form id="categoryFilterForm" class="arrow_u">
+                <select id="categorySelect" onchange="filterByCategory()">
+                    <option value="all">全て</option>
+                    {% assign tags = '' %}
+                    {% for article in blog.articles %}
+                        {% for tag in article.tags %}
+                            {% unless tags contains tag %}
+                                {% assign tags = tags | append: tag | append: ',' %}
+                            {% endunless %}
+                        {% endfor %}
+                    {% endfor %}
+                    {% assign tags = tags | split: ',' | sort %}
+                    {% for tag in tags %}
+                        {% if tag != '' %}
+                            <option value="{{ tag }}">{{ tag }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </form>
+        </div><!--p-order-content-->
+
+        <div class="item-list flex">
+            {% for article in blog.articles %}
+            <div class="item-card" data-category="{{ article.tags | join: ' ' }}">
+                <a class="h-scale" href="{{ article.url }}">
+                    <div class="img-box"><img src="{{ article.image | img_url: 'medium' }}" alt="{{ article.title }}"></div>
+                    <div class="right_wrap">
+                        <p class="cate">{{ article.tags | first }}</p>
+                        <p class="date">{{ article.published_at | date: "%Y.%m.%d" }}</p>
+                        <p class="p_title">{{ article.title }}</p>
+                        <p class="main_txt">{{ article.excerpt }}</p>
+                    </div>
+                    <div class="news_arrow">
+                        <svg version="1.1" id="layer" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                            y="0px" viewBox="0 0 40 40" style="enable-background:new 0 0 40 40;" xml:space="preserve">
+                        <style type="text/css">
+                            .st0{fill:none;stroke:#010642;}
+                            .st1{fill:#010642;}
+                        </style>
+                        <circle class="st0" cx="20" cy="20" r="19.5"/>
+                        <path class="st1" d="M14,19.5c-0.3,0-0.5,0.2-0.5,0.5s0.2,0.5,0.5,0.5V19.5z M22.3,20c0,1.5,1.2,2.7,2.7,2.7s2.7-1.2,2.7-2.7
+                            s-1.2-2.7-2.7-2.7S22.3,18.5,22.3,20z M14,20.5h11v-1H14V20.5z"/>
+                        </svg>
+                    </div>
+                </a>
+            </div><!-- /.item-card -->
+            {% endfor %}
+
+
+            <script>
+                function filterByCategory() {
+                    var category = document.getElementById('categorySelect').value;
+                    var items = document.getElementsByClassName('item-card');
+                    
+                    for (var i = 0; i < items.length; i++) {
+                        var item = items[i];
+                        var itemCategory = item.getAttribute('data-category');
+                        
+                        if (category === 'all' || itemCategory.includes(category)) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    }
+                }
+            </script>
+
+        </div><!-- /.item-list -->
+            
+        <button class="more" id="load-more">View More</button>
+    </div>
+</section>
+
+{% render 'under-blocks' %}
+
+{% schema %}
+    {
+    "name": "news",
+    "presets": [
+    {
+        "name": "news"
+    }
+    ]
+}
+{% endschema %}

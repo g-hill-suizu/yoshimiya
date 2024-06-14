@@ -1,0 +1,270 @@
+@use "variable"as v;
+@use "common"as c;
+/*************************************************
+footer
+*************************************************/
+
+footer{
+    background-image: url(https://cdn.shopify.com/s/files/1/0638/7833/2621/files/footer_bg.png);
+    background-repeat: no-repeat ;
+    background-position: 60%;
+    background-size: cover;
+    margin-top: 50px;
+    padding-top: v.pxtovw(150);
+    @include c.mq(sm) {
+        padding-top: v.pxtovw_sp(120);
+    // }
+    // @include c.mq(sm) {
+        background-position: 59%;
+    }
+    .inner{
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    .footer_inner{
+        // padding-top: v.pxtovw(150);
+        // @include c.mq(sm) {
+        //     padding-top: v.pxtovw_sp(120);
+        // }
+        .footerlogo {
+            @include c.mq(sm) {
+                text-align: center;
+            }
+            a{
+                transition: all .3s;
+                display: block;
+                width: 173px;
+                @include c.mq(sm) {
+                    width: 153px;
+                }
+                &:hover{
+                    opacity: .7;
+                }
+                .f-logo{
+                width: 173px;
+                height: auto;
+                @include c.mq(sm) {
+                    margin: 0 auto;;
+                    width: 153px;
+                    height: auto;
+                }
+            }
+            }
+
+        .fotter_logo_txt{
+            font-size: 2rem;
+            font-family: "Josefin Slab", serif;
+            font-weight: 700;
+            padding-top: 13px;
+            color: #fff;
+            @include c.mq(sm) {
+                font-size: 1.3rem;
+            }
+        }
+        }
+        
+        .footer_wrap{
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            @include c.mq(sm) {
+                justify-content: initial;
+            }
+
+
+            .footer_add{
+                @include c.mq(sm) {
+                    display: none;
+                }
+                .address{
+                    padding-top: 16px;
+                    font-size: 1.5rem;
+                }
+                .busi-hours{
+                    padding-top: 1rem;
+                    font-size: 1.5rem;
+                    line-height: 1.5;
+                }
+                
+            }
+            .right{
+                display: flex;
+                font-size: 1.5rem;
+                margin-top: -3rem;
+                gap: 120px;
+                letter-spacing: .17em;
+                @media screen and (max-width: 650px){
+                    margin-top: 0;
+                    gap: 100px;
+                }
+
+                @include c.mq(sm) {
+                    margin-top: 47px;
+                    gap: 0;
+                    font-size: 1.4rem;
+                }
+                .menu-left{
+                    @include c.mq(sm) {
+                        margin-right:  v.pxtovw_sp(100);
+                    }
+                    li{
+                        padding-bottom: 16px;
+                        a{
+                            transition: all .3s;
+                            &:hover{
+                                opacity: .7;
+                            }
+                        }
+                    }
+                    li:last-child{
+                        padding-bottom: 0;
+                    }
+                }
+                .menu-right{
+                    li{
+                        padding-bottom: 16px;
+                        a{
+                            transition: all .3s;
+                            &:hover{
+                                opacity: .7;
+                            }
+                        }
+                        .login{
+                            padding-bottom: 20px;
+                        }
+                        .cart{
+                            padding-bottom: 26px;
+                        }
+                        padding-bottom: 16px;
+                        a{
+                            transition: all .3s;
+                            &:hover{
+                                opacity: .7;
+                            }
+                        }
+                    }
+                    .sns_sp{
+                        display: none;
+                        @include c.mq(sm) {
+                            display: block;
+                        }
+                        a{
+                        display: flex;
+                        align-items: center;
+                        transition: all .3s;
+                        &:hover{
+                            opacity: .7;
+                        }
+                        }
+                        img{
+                            @include c.mq(sm) {
+                                width: 26px;
+                                height: 26px;
+                            }
+                        }
+                        p{
+                            font-size: 2rem;
+                            margin-left:  11px;
+                            font-family: "Josefin Slab", serif;
+                            font-weight: 700;
+                            margin-top: 5px;
+                            @include c.mq(sm) {
+                                font-size:  1.4rem;
+                            }
+                        }
+                    }
+                    .nav_pc{
+                        display: none;
+                    }
+
+                }
+
+            }
+
+        }
+        .nav_sp{
+            display: none;
+            @include c.mq(sm) {
+                display: block;
+                color: #fff;
+                padding-top: 54px;
+                .top_wrap{
+                    display: flex;
+                    font-size: 1.2rem;
+                    li{
+                        margin-right: 26px;
+                    }
+                }
+                p{
+                    padding-top: 15px;
+                }
+            }
+        }
+
+        .footer_add_sp{
+            display: none;
+            @include c.mq(sm) {
+                display: block;
+                color: #fff;
+                padding-top: 40px;
+                p{
+                padding-bottom: 7px;
+                font-size:  1.3rem;
+                font-weight: 400;
+                }
+                .shop{
+                    font-weight: 500;
+                }
+                .busi-hours{
+                line-height: 1.7;
+                }
+            }
+        }
+        .footer_bottom{
+            display: flex;
+            color: #fff;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 70px;
+            padding-bottom: 36px;
+            @include c.mq(sm) {
+                padding-top: 85px;
+                padding-bottom: 16px;
+                margin: 0 auto;
+            }
+
+            .sns {
+                @include c.mq(sm) {
+                    display: none;
+                }
+                a{
+                display: flex;
+                align-items: center;
+                transition: all .3s;
+                &:hover{
+                    opacity: .7;
+                }
+                
+                p{
+                    font-size: 2rem;
+                    margin-left:  11px;
+                    font-family: "Josefin Slab", serif;
+                    font-weight: 700;
+                    margin-top: 5px;
+                }
+                }
+            }
+            .copy{
+                font-size: 1.3rem;
+                font-family: "Josefin Slab", serif;
+                font-weight: 700;
+                @include c.mq(sm) {
+                    font-size: 1rem;
+                    margin: 0 auto;
+                }
+            }
+
+        }
+    }
+
+}

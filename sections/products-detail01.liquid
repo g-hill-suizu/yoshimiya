@@ -1,0 +1,165 @@
+
+<section class="products-detail_inner">
+    <div class="bg-filter"><img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/bg_img.jpg" alt=""></div>
+    <div class="under_bg"></div>
+    <div class="under_bg_2"></div>
+    <div class="inner">
+    <!-- メインコンテンツ -->
+    <section class="p-item_wrap p-top_mv over_2">
+        <div class="p-merchandise-detail">
+        <div class="p-merchandise__img-content">
+            <!-- パンくずリスト
+            <div class="breadcrumb">
+            <nav>
+                <ol>
+                <li><a href="index.html"><img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/icon-home.svg" alt=""></a></li>
+                <li><a href="#">カテゴリ名</a></li>
+                <li>商品名</li>
+                </ol>
+            </nav>
+            </div> -->
+
+            <div class="p-merchandise__img-wrapper">
+            <div class="swiper03">
+                <div class="swiper-wrapper">
+                    {% for image in product.images %}
+                    <div class="swiper-slide">
+                        <div class="p-img-wrapper obj-fit">
+                        <img src="{{ image.src | img_url: 'master' }}" alt="">
+                        </div>
+                    </div>
+                    {%- endfor -%}
+
+                    {% comment %} <div class="swiper-slide">
+                        <div class="p-img-wrapper">
+                        <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/product_item_img.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="p-img-wrapper">
+                        <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/product_item_img.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="p-img-wrapper">
+                        <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/product_item_img.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="p-img-wrapper">
+                        <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/product_item_img.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="p-img-wrapper">
+                        <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/product_item_img.jpg" alt="">
+                        </div>
+                    </div> {% endcomment %}
+                </div><!-- /.swiper-wrapper -->
+            </div><!-- /.swiper03 -->
+
+            <div class="thumb-list">
+                {% for image in product.images %}
+                <div class="thumb-item">
+                    <a
+                        class="thumb-link obj-fit"
+                        href="javascript:void(0);"
+                        onclick="thumbnail({{ forloop.index }})">
+                        <img src="{{ image.src | img_url: 'master' }}" alt="">
+                    </a>
+                </div>
+                {%- endfor -%}
+
+                {% comment %} <div class="thumb-item">
+                    <a class="thumb-link" href="javascript:void(0);" onclick="thumbnail(2)">
+                        <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/product_item_img.jpg" alt="">
+                    </a>
+                </div>
+                <div class="thumb-item">
+                    <a class="thumb-link" href="javascript:void(0);" onclick="thumbnail(3)">
+                        <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/product_item_img.jpg" alt="">
+                    </a>
+                </div>
+                <div class="thumb-item">
+                    <a class="thumb-link" href="javascript:void(0);" onclick="thumbnail(4)">
+                        <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/product_item_img.jpg" alt="">
+                    </a>
+                </div>
+                <div class="thumb-item">
+                    <a class="thumb-link" href="javascript:void(0);" onclick="thumbnail(5)">
+                        <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/product_item_img.jpg" alt="">
+                    </a>
+                </div>
+                <div class="thumb-item">
+                    <a class="thumb-link" href="javascript:void(0);" onclick="thumbnail(6)">
+                        <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/product_item_img.jpg" alt="">
+                    </a>
+                </div> {% endcomment %}
+            </div><!-- /.thumb-list -->
+            </div><!-- /.p-merchandise__img-wrapper -->
+
+        </div><!-- /.left -->
+        <div class="p-merchandise__detail-content">
+            {% assign current_variant = product.selected_or_first_available_variant %}
+            <p class="cate-name">
+                {% for collection in product.collections %}
+                {% assign excluded_collections = 'all' | split: ',' %}
+                {% unless excluded_collections contains collection.handle %}
+                    {{ collection.title }}
+                {% endunless %}
+                {% endfor %}
+            </p>
+            <h1 class="c-merchandise__name">{{ product.title }}</h1>
+            {% if product.compare_at_price_max and product.compare_at_price_max > product.price %}
+                <p class="c-price"><span>¥</span>{{ product.compare_at_price_max | money_with_currency }}<span class="tax">(税込)</span>
+                </p>
+                <p class="c-price" style="color: #f00;">割引価格：{{ product.price | money_with_currency }}<span class="tax">（税込）</span>
+                </p>
+            {% else %}
+                <p class="c-price">{{ product.price | money_with_currency }}<span class="tax">（税込）</span>
+                </p>
+            {% endif %}
+            <div class="p-txt-block">
+                <p class="p-block__ttl">【商品説明】</p>
+                <div class="p-block__text">
+                    {{ product.description | raw }}
+                </div>
+            </div>
+
+            <div class="p-count">
+            <form action="/cart/add" method="post" id="cart_in">
+                <input
+                    type="hidden"
+                    name="id"
+                    value="{{ product.variants[0].id }}" />
+                <div class="count_inner">
+                <!-- <p class="c-ttl">購入数</p> -->
+                <div class="product-quantity">
+                    <button type="button" id="minus">ー</button>
+                    <input type="number" id="quantity" name="quantity" min="1" value="1" class="spin_erase">
+                    <button type="button" id="plus">＋</button>
+                </div>
+                </div>
+                <div class="p-btn-wrapper">
+                <button type="button" class="c-btn">カートに入れておく</button>
+                <button type="submit" class="c-btn b-btn">お会計に進む</button>
+                </div>
+            </form>
+            </div>
+        </div>
+        </div>
+
+    </section><!-- /.p-item_wrap-->
+    </div><!-- /.inner-->
+</section>
+
+{% schema %}
+    {
+    "name": "products-detail01",
+    "presets": [
+    {
+        "name": "products-detail01"
+    }
+    ]
+}
+{% endschema %}

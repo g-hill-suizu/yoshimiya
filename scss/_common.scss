@@ -1,0 +1,351 @@
+/*************************************************
+common-style
+*************************************************/
+@mixin base_width{
+  margin: 0 auto;
+  width: 1200px;
+}
+// @extendでスタイルの継承
+// @mixinでステイルの定義
+// @includeでmixinの呼び出し
+
+// ブレイクポイント
+// PC基準でコーディングする場合
+$breakpoints: (
+  "sm": "screen and (max-width: 599px)", //スマホ
+  "md": "screen and (max-width: 1024px)", //タブレット
+) !default;
+@mixin mq($breakpoint: sm) {
+  @media #{map-get($breakpoints , $breakpoint)} {
+    @content;
+  }
+}
+
+// スマホ基準でコーディングする場合
+// $breakpoints: (
+//   "md": "screen and (min-width: 600px)", //タブレット
+//   "lg": "screen and (min-width: 1025px)", //パソコン
+// ) !default;
+// @mixin mq($breakpoint: lg) {
+//   @media #{map-get($breakpoints , $breakpoint)} {
+//     @content;
+//   }
+// }
+
+*{
+  box-sizing: border-box;
+}
+
+.ie_ObjectFit {
+object-fit: cover;
+font-family: 'object-fit: cover;'
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body{
+  font-family: 'Zen Kaku Gothic New', 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro','メイリオ', 'Meiryo', '游ゴシック', 'Yu Gothic', 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+  color: #010642;
+  font-weight: 500;
+  letter-spacing: .17em;
+  // font-family: 'ヒラギノ明朝 Pro W3', 'Hiragino Mincho Pro', '游明朝','Yu Mincho', '游明朝体', 'YuMincho','ＭＳ Ｐ明朝', 'MS PMincho', serif;
+}
+
+p{
+  font-size: 1.5rem;
+  @include mq(sm){
+    font-size: 1.3rem;
+  }
+}
+
+.clearfix:after {
+    content:"";
+    display:block;
+    clear:both;
+}
+
+.obj-fit {
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+
+// ul {
+//   display: flex;
+//   flex-wrap: wrap;
+//   column-gap: 4.5rem;
+//   row-gap: 1.8rem;
+//   margin-bottom: 9rem;
+//   position: relative;
+//   z-index: 1;
+
+//   @include c.mq(md) {
+//   gap: 2.0rem 2.4rem;
+//   }
+
+//   @include c.mq(sm) {
+//   gap: 1.5rem 1.0rem;
+//   margin-bottom: 6rem;
+//   }
+
+//   li {
+//       width: calc((100% / 3) - (9rem / 3));
+//       height: 43px;
+//       position: relative;
+
+//       @include c.mq(md) {
+//           width: calc((100% / 3) - (4.8rem / 3));
+//       }
+
+//       @include c.mq(sm) {
+//           display: grid;
+//           width: calc((100% / 2) - (1.0rem / 2));
+//           height: auto;
+//           align-items: center;
+//           // height: 7rem;
+//       }
+//       a {
+//           // position: relative;
+//           display: block;
+//           // width: 348px;
+//           transition: all .3s;
+//           border: 1px solid #010642;
+//           color: #010642;
+//           border-radius: 100vh;
+//           text-align: center;
+
+//           img {
+//           width: 100%;
+//           vertical-align: middle;
+//           }
+
+//           .cate-name {
+//           font-size: 1.6rem;
+//           letter-spacing: .17em;
+//           padding: 11px 30px;
+//           @include c.mq(sm) {
+//               padding: 10px 20px;
+//               }
+//           p {
+//               @include c.mq(md) {
+//                   font-size: 1.3rem;
+//                   letter-spacing: 0;
+//               }
+//               @include c.mq(sm) {
+//                   font-size: 1.2rem;
+//                   line-height: 1.4;
+//                   margin-left: -1rem;
+//               }
+
+//           }
+//           svg{
+//               width: 16px;
+//               height: auto;
+//               position: absolute;
+//               top: 50%;
+//               right: 10%;
+//               transform: translateY(-50%);
+//               @include c.mq(sm) {
+//                   right: 5%;
+//                   width: 13px;
+//                   height: auto;
+//                   }
+
+//               img{
+//                   width: 100%;
+//                   height: auto;
+//               }
+//               .cls-1{
+//                   transition: all .3s;
+//               }
+//               }
+//               &:hover .cls-1{
+//                   fill: #fff;
+//               }
+//           }
+//           &:hover {
+//           background-color: #010642;
+//           color: #fff;
+//           }
+//       }
+//   }
+// }
+
+.btn{
+  width: 236px;
+  height: 43px;
+  font-size: 1.6rem;
+  letter-spacing: .17em;
+  @include mq(sm) {
+    width: 220px;
+    height: 43px;
+    font-size: 1.4rem;
+  }
+
+  a{
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #010642;
+    color: #010642;
+    border-radius: 100vh;
+    transition: all .3s;
+    padding: 11px 20px 11px 20px;
+    @include mq(sm) {
+      padding: 11px 20px 11px 30px;
+    }
+
+    svg{
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translate(-50%, -50%);
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      width: 13px;
+      height: auto;
+      margin-left: 20px;
+      .cls-1{
+      transition: all .3s;
+      }
+    }
+    &:hover{
+      color: #fff;
+      background-color: #010642;
+    }
+    &:hover .cls-1{
+      fill: #fff;
+    }
+  }
+}
+
+.underpage_btn{
+  width: 348px;
+  @include mq(sm) {
+    width: 80%;
+  }
+  a{
+    padding: 11px 20px 11px 40px;
+    @include mq(sm) {
+      padding: 10px 15px 10px 30px;
+    }
+  }
+}
+
+.inner{
+  max-width: 1200px;
+  margin: 0 auto;
+  @media screen and (max-width: 1240px) {
+    width: 90%;
+  }
+
+  @include mq(md) {
+    // width: 90%;
+    width: 90%;
+  }
+}
+
+.over{
+  position: relative;
+  z-index: 5;
+}
+
+.over_2{
+  position: relative;
+  z-index: 10;
+}
+
+.change_red {
+  color: #FF0000;
+}
+
+
+.dots_list {
+  list-style: "・" outside;
+  margin-left: 1rem;
+
+  li {
+    padding-left: .2rem;
+
+    @include mq(sm) {
+      margin-bottom: 1.6rem;
+    }
+  }
+}
+
+br.pc{
+  @include mq(sm){
+    display: none;
+  }
+}
+
+br.sp{
+  display: none;
+  @include mq(sm){
+    display: block;
+  }
+}
+
+br.mb{
+  display: none;
+  @include mq(md){
+    display: block;
+  }
+  @include mq(sm){
+    display: none;
+  }
+}
+
+//ページ内リンク位置調整
+.anchor-link{
+  padding-top: 130px;
+  margin-top: -130px;
+}
+
+// フェードインアニメ
+.fadeInTriger {
+  opacity:0;
+}
+
+.fadeIn{
+  animation-name: fadeUpAnime;
+  animation-duration:0.5s;
+  animation-fill-mode:forwards;
+  }
+  @keyframes fadeUpAnime{
+    from {
+      opacity: 0;
+    transform: translateY(100px);
+    }
+    to {
+      opacity: 1;
+    transform: translateY(0);
+    }
+}
+
+
+// /iOSでのデフォルトスタイルをリセット /
+input[type="submit"],
+input[type="button"] {
+border-radius: 0;
+-webkit-box-sizing: content-box;
+-webkit-appearance: button;
+appearance: button;
+border: none;
+box-sizing: border-box;
+&::-webkit-search-decoration {
+display: none;
+}
+&:focus {
+outline-offset: -2px;
+}
+}
+
