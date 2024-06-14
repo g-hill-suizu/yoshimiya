@@ -17,16 +17,10 @@
       "type": "news",
       "settings": {
       }
-    },
-    "news_ACmyxa": {
-      "type": "news",
-      "settings": {
-      }
     }
   },
   "order": [
     "main",
-    "news_jkPqTp",
-    "news_ACmyxa"
+    "news_jkPqTp"
   ]
 }
