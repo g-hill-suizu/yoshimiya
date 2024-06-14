@@ -48,12 +48,12 @@
             {% for article in blog.articles %}
             <div class="item-card" data-category="{{ article.tags | join: ' ' }}">
                 <a class="h-scale" href="{{ article.url }}">
-                    <div class="img-box"><img src="{{ article.image | img_url: 'medium' }}" alt="{{ article.title }}"></div>
+                    <div class="img-box obj-fit"><img src="{{ article.image | img_url: 'medium' }}" alt="{{ article.title }}"></div>
                     <div class="right_wrap">
                         <p class="cate">{{ article.tags | first }}</p>
                         <p class="date">{{ article.published_at | date: "%Y.%m.%d" }}</p>
                         <p class="p_title">{{ article.title }}</p>
-                        <p class="main_txt">{{ article.excerpt }}</p>
+                        <p class="main_txt">{{ article.excerpt_or_content | strip_html | truncatewords: 30 }}</p>
                     </div>
                     <div class="news_arrow">
                         <svg version="1.1" id="layer" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"

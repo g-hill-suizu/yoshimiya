@@ -1,0 +1,95 @@
+<div class="bg-filter"><img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/bg_img.jpg" alt=""></div> 
+<!--メインビジュアル-->
+<section class="news_detail_wrap">
+    <div class="under_bg"></div>
+    <div class="under_bg_2"></div>
+    <div class="inner over_2">
+        <div class="ttl_wrap fadeInTriger">
+            <p class="cate">{{ article.tags | first }}</p>
+            <h1 class="news_ttl">{{ article.title }}</h1>
+            <p class="date">{{ article.published_at | date: "%Y.%m.%d" }}</p>
+        </div>
+        <div class="news-details_content">
+            {{ article.content }}
+        </div>
+        <div class="btn underpage_btn news_btn fadeInTriger">
+            <a href="{{ blog.url }}" class="btn_txt">
+                <svg id="layer" data-name="layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.39 5.33">
+                    <defs>
+                        <style>
+                            .cls-1 {
+                            fill: #010642;
+                            stroke-width: 0px;
+                            }
+                        </style>
+                    </defs>
+                    <path class="cls-1" d="M0,2.67c0,1.47,1.19,2.67,2.67,2.67s2.67-1.19,2.67-2.67S4.14,0,2.67,0,0,1.19,0,2.67ZM18.89,3.17c.28,0,.5-.22.5-.5s-.22-.5-.5-.5v1ZM2.67,3.17h16.22v-1H2.67v1Z"/>
+                </svg>
+                良味屋だより一覧に戻る
+            </a>
+        </div><!--btn underpage_btn about_btn-->
+
+        <div class="article_inner fadeInTriger">
+            <!-- ページネーション -->
+            <div class="article_pager">
+                <nav class="p-pager">
+                    <ul class="p-gager__list">
+                        <li class="p-pager__item">
+                            {% if blog.previous_article %}
+                            <a href="{{ blog.previous_article.url }}" class="p-pager__link">
+                                <div class="prev">
+                                    <p>前の記事</p>
+                                </div>
+                                <div class="thumn-box_news obj-fit">
+                                    <img src="{{ blog.previous_article.image.src | img_url: '300x300' }}" alt="{{ article.image.alt }}">
+                                </div>
+                                <div class="news_head-info">
+                                    <p class="cate-name">{{ blog.previous_article.tags |  first }}</p>
+                                    <p class="time">{{ blog.previous_article.created_at | date: '%Y.%m.%d' }}</p>
+                                </div>
+                                <div class="news-name">
+                                    <p>{{ blog.previous_article.title }}</p>
+                                </div>
+                            </a>
+                            {% endif %}
+                        </li>
+            
+                        <li class="p-pager__item">
+                            {% if blog.next_article %}
+                            <a href="{{ blog.next_article.url }}" class="p-pager__link">
+                                <div class="next">
+                                    <p>次の記事</p>
+                                </div>
+                                <div class="thumn-box_news right obj-fit">
+                                    <img src="{{ blog.next_article.image.src | img_url: '300x300' }}" alt="{{ article.image.alt }}">
+                                </div>
+                                <div class="news_head-info">
+                                    <p class="cate-name">{{ blog.next_article.tags | first }}</p>
+                                    <p class="time">{{ blog.next_article.created_at | date: '%Y.%m.%d' }}</p>
+                                </div>
+                                <div class="news-name">
+                                    <p>{{ blog.next_article.title }}</p>
+                                </div>
+                            </a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- ページネーションここまで -->
+        </div>
+    </div><!-- /.inner -->
+</section>
+
+{% render 'under-blocks' %}
+
+{% schema %}
+    {
+    "name": "news-detail",
+    "presets": [
+    {
+        "name": "news-detail"
+    }
+    ]
+}
+{% endschema %}

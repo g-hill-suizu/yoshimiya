@@ -393,4 +393,37 @@ document.addEventListener("DOMContentLoaded", function() {
   //     });
   //   });
   // });
-  
+
+  document.addEventListener("DOMContentLoaded", function() {
+    var modalTriggers = document.querySelectorAll('.modaal-btn');
+
+    modalTriggers.forEach(function(trigger) {
+        trigger.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            var target = trigger.getAttribute('href');
+            var modalContent = document.querySelector(target).innerHTML;
+
+            var tempDiv = document.createElement('div');
+            tempDiv.id = 'dynamic-modaal-box';
+            tempDiv.innerHTML = modalContent;
+            tempDiv.style.display = 'block';
+            document.body.appendChild(tempDiv);
+
+            $(tempDiv).modaal({
+                before_open: function() {
+                    // Remove existing dynamic modaal boxes
+                    var existingModals = document.querySelectorAll('#dynamic-modaal-box');
+                    existingModals.forEach(function(modal) {
+                        modal.parentNode.removeChild(modal);
+                    });
+                },
+                after_close: function() {
+                    tempDiv.parentNode.removeChild(tempDiv);
+                }
+            });
+
+            $(tempDiv).modaal('open');
+        });
+    });
+});

@@ -1,0 +1,26 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-blog",
+      "disabled": true,
+      "settings": {
+        "layout": "collage",
+        "show_image": true,
+        "image_height": "medium",
+        "show_date": true,
+        "show_author": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "wholesale_i8reMn": {
+      "type": "wholesale",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "main",
+    "wholesale_i8reMn"
+  ]
+}

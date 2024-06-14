@@ -14,9 +14,9 @@
   }
 {%- endstyle -%}
 
-<div class="color-{{ section.settings.color_scheme }} gradient">
-  <div class="contact page-width page-width--narrow section-{{ section.id }}-padding">
-    {%- if section.settings.heading != blank -%}
+{% comment %} <div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="contact page-width page-width--narrow section-{{ section.id }}-padding"> {% endcomment %}
+    {% comment %} {%- if section.settings.heading != blank -%}
       <h2 class="title title-wrapper--no-top-margin inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
         {{ section.settings.heading }}
       </h2>
@@ -28,16 +28,16 @@
       if settings.animations_reveal_on_scroll
         assign contact_form_class = 'isolate scroll-trigger animate--slide-in'
       endif
-    -%}
+    -%} {% endcomment %}
     {%- form 'contact', id: 'ContactForm', class: contact_form_class -%}
       {%- if form.posted_successfully? -%}
-        <h2 class="form-status form-status-list form__message" tabindex="-1" autofocus>
+        <h2 class="form-status form-status-list form__message form-success-title" tabindex="-1" autofocus>
           {% render 'icon-success' %}
-          {{ 'templates.contact.form.post_success' | t }}
+          お問い合わせありがとうございました。担当より折り返しご連絡いたします。
         </h2>
       {%- elsif form.errors -%}
         <div class="form__message">
-          <h2 class="form-status caption-large text-body" role="alert" tabindex="-1" autofocus>
+          <h2 class="form-status caption-large text-body form-error-title" role="alert" tabindex="-1" autofocus>
             {% render 'icon-error' %}
             {{ 'templates.contact.form.error_heading' | t }}
           </h2>
@@ -51,6 +51,48 @@
           </li>
         </ul>
       {%- endif -%}
+
+        <table>
+            <tr>
+                <th><label for="form_name">お名前</label></th>
+                <td>
+                    <input type="text" id="form_name" name="contact[お名前]" placeholder="例）良味 太郎" required>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="form_mail">メールアドレス</label></th>
+                <td>
+                    <input type="email" id="form_mail" name="contact[email]" placeholder="例）xxxxxx@sample.com" required>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="form_tel">電話番号</label></th>
+                <td>
+                    <input type="tel" id="form_tel" name="contact[電話番号]" placeholder="例）098-893-6896" required>
+                </td>
+            </tr>
+            <tr>
+                <th class="textarea"><label for="form_textarea">お問い合わせ内容</label></th>
+                <td class="textarea_wrap">
+                    <textarea name="contact[body]" id="form_textarea" cols="30" rows="15"></textarea>
+                </td>
+            </tr>
+        </table>
+        <button type="submit">送信する
+            <svg id="_layer_1" data-name="layer1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.17 5.33">
+                <defs>
+                <style>
+                    .cls-1 {
+                    fill: #010642;
+                    stroke-width: 0px;
+                    }
+                </style>
+                </defs>
+                <path class="cls-1" d="M.5,2.17c-.28,0-.5.22-.5.5s.22.5.5.5v-1ZM8.83,2.67c0,1.47,1.19,2.67,2.67,2.67s2.67-1.19,2.67-2.67-1.19-2.67-2.67-2.67-2.67,1.19-2.67,2.67ZM.5,3.17h11v-1H.5v1Z"/>
+            </svg>
+        </button>
+
+{% comment %}         
       <div class="contact__fields">
         <div class="field">
           <input
@@ -128,10 +170,11 @@
         <button type="submit" class="button">
           {{ 'templates.contact.form.send' | t }}
         </button>
-      </div>
+      </div> {% endcomment %}
+
     {%- endform -%}
-  </div>
-</div>
+  {% comment %} </div>
+</div> {% endcomment %}
 
 {% schema %}
 {

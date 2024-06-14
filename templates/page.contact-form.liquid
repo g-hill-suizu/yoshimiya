@@ -1,0 +1,30 @@
+<div class="bg-filter"><img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/bg_img.jpg" alt=""></div>   
+<!--メインビジュアル-->
+<div class="p-top_mv under_mv_img_wrap over_2 obj-fit">
+    <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/underpage_mv.png" alt="" class="under_mv_img">
+    <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/underpage_mv_sp.png" alt="" class="under_mv_img_sp">
+    <div class="title_circle"><img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/title_bg_circle.png" alt=""></div>
+    <div class="under_page_title_wrap">
+        <h2>お問い合わせ</h2>
+        <p class="subtitle">contact</p>
+    </div>
+</div>
+
+<section class="contact_wrap">
+    <div class="under_bg"></div>
+    <div class="under_bg_2"></div>
+    <div class="inner over">
+        <p class="contact_text">お問い合わせは、下記お電話またはメールフォームにて承ります。
+            <br>また、お客さまからよく寄せられる質問とその回答を、「よくある質問」ページにまとめておりますので、ぜひご覧ください。
+        </p>
+
+        {% render 'tel-blocks' %}
+
+        <h3 class="midium_ttl">メールフォームから</h3>
+        <div class="form_wrap">
+            {% section 'contact-form' %}
+        </div>
+    </div>
+</section>
+
+{% render 'under-blocks' %}
