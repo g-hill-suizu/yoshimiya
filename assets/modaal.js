@@ -414,6 +414,12 @@
 
 			// if inline, clone content into space
 			if (self.options.type == 'inline') {
+				//追加
+				// contentがjQueryオブジェクトであることを確認
+				if (!(content instanceof jQuery)) {
+					content = $(content);
+				}
+				//追加ここまで
 				content.appendTo('#' + self.scope.id + ' .modaal-content-container');
 			}
 

@@ -17,7 +17,7 @@
             <div class="p_category">
             <ul>
                 <li class="thumn-box">
-                    <a href="#">
+                    <a href="/collections/andagi/">
                         <div class="cate-name">
                         <p>サーターアンダギー</p>
                         <svg id="rayer1" data-name="layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.17 5.33">
@@ -35,7 +35,7 @@
                     </a>
                 </li>
                     <li class="thumn-box">
-                    <a href="#">
+                    <a href="/collections/chinsukou/">
                         <div class="cate-name">
                         <p>ちんすこう</p>
                         <svg class="chinsuko" id="rayer2" data-name="layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.17 5.33">
@@ -53,7 +53,7 @@
                     </a>
                 </li>
                 <li class="thumn-box">
-                    <a href="#">
+                    <a href="/collections/brown-sugar/">
                         <div class="cate-name">
                         <p>黒糖/黒糖菓子</p>
                         <svg class="kokuto" id="layer3" data-name="layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.17 5.33">
@@ -71,7 +71,7 @@
                     </a>
                 </li>
                 <li class="thumn-box">
-                    <a href="#">
+                    <a href="/collections/gift/">
                         <div class="cate-name">
                         <p>ギフト</p>
                         <svg class="gift" id="layer4" data-name="layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.17 5.33">
@@ -89,7 +89,7 @@
                     </a>
                 </li>
                 <li class="thumn-box">
-                    <a href="#">
+                    <a href="/collections/favorite/">
                         <div class="cate-name">
                         <p>店長の推し！<br class="sp">THE 沖縄</p>
                         <svg id="layer5" data-name="layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.17 5.33">
@@ -107,7 +107,7 @@
                     </a>
                 </li>
                 <li class="thumn-box">
-                    <a href="#">
+                    <a href="/collections/other/">
                         <div class="cate-name">
                         <p>その他</p>
                         <svg class="other" id="layer6" data-name="layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.17 5.33">
@@ -168,75 +168,32 @@
 
 
     </div>
+    {% render 'under-blocks' %}
 
-    <div class="separator02 over_2">
-        <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/separator.png" alt="">
-    </div>
-
-    <div class="under_banner over_2 fadeInTriger">
-        <div class="banner_wrap inner ">
-            <div class="bnr obj-fit">
-                <a href="">
-                    <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/banner_left.png" alt="">
-                </a>
-            </div>
-            <div class="bnr obj-fit">
-                <a href="">
-                    <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/banner_right.png" alt="">
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!--footer直前のリンク-->
-    <div class="link over_2 under_link fadeInTriger">
-        <!-- <div class="bg_img"></div>
-        <div class="bg_img_2"></div> -->
-        <div class="inner link_wrap over_2">
-        <ul class="link_item">
-            <li>
-            <a href="faq.html#order_payment" class="link_list">
-                <p class="link_text">注文・支払いについて</p>
-            </a>
-            </li>
-            <li>
-            <a href="faq.html#shipping_cost" class="link_list">
-                <p class="link_text">配送・送料について</p>
-            </a>
-            </li>
-
-            <li>
-            <a href="faq.html#return_exchange" class="link_list">
-                <p class="link_text">返品・交換について</p>
-            </a>
-            </li>
-        </ul>
-        </div>
-    </div>
 </section>
 
 
 {% javascript %}
-  //ソート
-  let parameters = {};
-    if (location.search.length) {
-    let keyValue = "";
-    let couples = location.search.substr(1).split('&');
-    for (let i = 0; i < couples.length; i++) {
-      keyValue = couples[i].split('=');
-      if (keyValue.length > 1) {
-        parameters[decodeURIComponent(keyValue[0])] = decodeURIComponent(keyValue[1]);
-      }
+    //ソート
+    let parameters = {};
+        if (location.search.length) {
+        let keyValue = "";
+        let couples = location.search.substr(1).split('&');
+        for (let i = 0; i < couples.length; i++) {
+        keyValue = couples[i].split('=');
+        if (keyValue.length > 1) {
+            parameters[decodeURIComponent(keyValue[0])] = decodeURIComponent(keyValue[1]);
+        }
+        }
     }
-  }
-  const selectElement = document.querySelector("#SortBy");
-  selectElement.addEventListener("change", function(event) {
-    parameters.sort_by = event.target.value;
-    const url = Object.keys(parameters).map(function(key) {
-      return encodeURIComponent(key) + '=' + encodeURIComponent(parameters[key])
-    }).join('&');
-    location.search = url;
-  });
+    const selectElement = document.querySelector("#SortBy");
+    selectElement.addEventListener("change", function(event) {
+        parameters.sort_by = event.target.value;
+        const url = Object.keys(parameters).map(function(key) {
+        return encodeURIComponent(key) + '=' + encodeURIComponent(parameters[key])
+        }).join('&');
+        location.search = url;
+    });
 {% endjavascript %}
 
 

@@ -399,8 +399,13 @@
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
-      <!-- js -->
+    <!-- js -->
+    <!-- JQueryの読み込み -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- swiperの読み込み -->
+    <script src="{{ 'swiper-bundle.min.js' | asset_url }}"></script>
+    {% comment %} <link rel="stylesheet" href="{{ 'swiper-bundle.min.css' | asset_url }}" /> {% endcomment %}
+    <!-- その他のスタイルシートやスクリプトの読み込み -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
     <script src="{{ 'jquery.inview.min.js' | asset_url }}"></script>
     <script>
@@ -409,9 +414,8 @@
       $(this).addClass('fadeIn'); //処理を記述
     });
     </script>
-    <script src="{{ 'swiper-bundle.min.js' | asset_url }}"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/simplebar@5.3.6/dist/simplebar.min.js"></script>
-    <script src="{{ 'main.js' | asset_url }}"></script>
+    <script src="{{ 'main.js' | asset_url | script_tag }}"></script>
     {% if template.name == 'product' %}
       <script>
         const swiper03 = new Swiper(".swiper03", {
@@ -439,14 +443,93 @@
             quantityInput.value = currentVal + 1;
             });
         });
-    </script>
+      </script>
     {% endif %}
 
-    <script>
-      /* // https://github.com/protonet/jquery.inview /で対応 */
-      $('.fadeInTriger').on('inview', function () { // fadeInTrigerが表示されたら
-          $(this).addClass('fadeIn'); //処理を記述
-      });
-    </script>
+    {% if template.name == 'blog' %}
+      <script src="{{ 'modaal.js' | asset_url }}"></script>
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          // モーダルの初期化
+          $('.modaal-btn').modaal({
+            background: '#FEF8F1',
+            overlay_opacity: '1',
+            after_open: function() {
+              // モーダルが開いた後にSwiperを初期化する
+              const swiperInstances = document.querySelectorAll(".swiper04");
+              swiperInstances.forEach(function(swiperInstance) {
+                new Swiper(swiperInstance, {
+                  loop: true,
+                });
+              });
+            }
+          });
+    
+          // サムネイルクリック時の処理
+          window.thumbnail = function(index) {
+            const swiperInstances = document.querySelectorAll(".swiper04");
+            swiperInstances.forEach(function(swiperInstance) {
+              swiperInstance.swiper.slideToLoop(index - 1); //SwiperのインスタンスでslideToLoopを使用
+            });
+          }
+        });
+      </script>
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          // 初期表示アイテム数
+          let itemsToShow = 20;
+          const items = document.querySelectorAll('.item-card02');
+          const totalItems = items.length;
+          let visibleItems = itemsToShow;
+  
+          console.log(`Total items: ${totalItems}`); // デバッグ用ログ
+          
+          // 最初に表示するアイテム数を制御
+          items.forEach((item, index) => {
+            if (index < itemsToShow) {
+              item.style.display = 'block';
+            } else {
+              item.style.display = 'none';
+            }
+          });
+          
+          // // 全てのアイテムが初めから表示されている場合は、ボタンを非表示にする
+          // if (totalItems <= itemsToShow) {
+          //   document.getElementById('load-more03').style.display = 'none';
+          // }
+  
+            // 全てのアイテムが初めから表示されている場合は、ボタンを非表示にする
+          const loadMoreButton = document.getElementById('load-more03');
+          if (totalItems <= itemsToShow) {
+            loadMoreButton.style.display = 'none';
+          }
+          
+          // 「さらに表示する」ボタンのクリックイベント
+          // document.getElementById('load-more03').addEventListener('click', function() {
+          // 「さらに表示する」ボタンのクリックイベント
+          loadMoreButton.addEventListener('click', function() {
+          console.log('Load more button clicked'); // デバッグ用ログ
+  
+  
+          // 次のitemsToShow個のアイテムを表示する
+            const nextToShow = visibleItems + itemsToShow;
+            for(let i = visibleItems; i < nextToShow; i++) {
+              if (i < totalItems) {
+                items[i].style.display = 'block';
+              }
+            }
+            visibleItems += itemsToShow;
+          
+            // もし全てのアイテムが表示されたら、ボタンを隠す
+            if (visibleItems >= totalItems) {
+              // document.getElementById('load-more03').style.display = 'none';
+              loadMoreButton.style.display = 'none';
+            }
+            });
+          });
+        </script>
+    {% endif %}
+
+
   </body>
 </html>

@@ -290,48 +290,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
   
-
-// 卸ぺージのMoreボタン
-
-document.addEventListener("DOMContentLoaded", function() {
-  // 初期表示アイテム数
-  let itemsToShow = 20;
-  const items = document.querySelectorAll('.item-card02');
-  const totalItems = items.length;
-  let visibleItems = itemsToShow;
-  
-  // 最初に表示するアイテム数を制御
-  items.forEach((item, index) => {
-    if (index < itemsToShow) {
-      item.style.display = 'block';
-    } else {
-      item.style.display = 'none';
-    }
-  });
-  
-  // 全てのアイテムが初めから表示されている場合は、ボタンを非表示にする
-  if (totalItems <= itemsToShow) {
-    document.getElementById('load-more03').style.display = 'none';
-  }
-  
-  // 「さらに表示する」ボタンのクリックイベント
-  document.getElementById('load-more03').addEventListener('click', function() {
-    // 次のitemsToShow個のアイテムを表示する
-    const nextToShow = visibleItems + itemsToShow;
-    for(let i = visibleItems; i < nextToShow; i++) {
-      if (i < totalItems) {
-        items[i].style.display = 'block';
-      }
-    }
-    visibleItems += itemsToShow;
-  
-    // もし全てのアイテムが表示されたら、ボタンを隠す
-    if (visibleItems >= totalItems) {
-      document.getElementById('load-more03').style.display = 'none';
-    }
-    });
-  });
-
   // カート画面に遷移せずに商品をカートに追加するボタン
 
   // document.addEventListener('DOMContentLoaded', function() {
@@ -393,37 +351,3 @@ document.addEventListener("DOMContentLoaded", function() {
   //     });
   //   });
   // });
-
-  document.addEventListener("DOMContentLoaded", function() {
-    var modalTriggers = document.querySelectorAll('.modaal-btn');
-
-    modalTriggers.forEach(function(trigger) {
-        trigger.addEventListener('click', function(event) {
-            event.preventDefault();
-
-            var target = trigger.getAttribute('href');
-            var modalContent = document.querySelector(target).innerHTML;
-
-            var tempDiv = document.createElement('div');
-            tempDiv.id = 'dynamic-modaal-box';
-            tempDiv.innerHTML = modalContent;
-            tempDiv.style.display = 'block';
-            document.body.appendChild(tempDiv);
-
-            $(tempDiv).modaal({
-                before_open: function() {
-                    // Remove existing dynamic modaal boxes
-                    var existingModals = document.querySelectorAll('#dynamic-modaal-box');
-                    existingModals.forEach(function(modal) {
-                        modal.parentNode.removeChild(modal);
-                    });
-                },
-                after_close: function() {
-                    tempDiv.parentNode.removeChild(tempDiv);
-                }
-            });
-
-            $(tempDiv).modaal('open');
-        });
-    });
-});
