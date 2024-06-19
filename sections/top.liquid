@@ -114,7 +114,7 @@
 
           {% for product in collections.all.products limit:5%}
             <li>
-                <a href="#" class="r_list">
+                <a href="{{ product.url }}" class="r_list">
                     <div class="img_box obj-fit"><img src="{{ product.featured_image.src | img_url: 'master' }}" alt=""></div>
                     <p class="cate_name">
                         {% for collection in product.collections %}
@@ -128,86 +128,55 @@
                     <p class="item_text">{{ product.price | money }}円<span>(税込)</span></p>
                 </a>
                 <div class="recommend_btn">
-                  <button type="button" class="add-to-cart-btn cart-btn" data-product-id="{{ product.variants.first.id }}" data-stock-quantity="{{ product.variants.first.inventory_quantity }}">
-                      <svg id="_layer_1" data-name="layer1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22.5 22.5">
-                      <defs>
-                          <style>
-                          .cls-1 {
-                              fill: #010642;
-                              stroke-width: 0px;
-                          }
-                          </style>
-                      </defs>
-                      <path class="cls-1" d="M18,18c.6,0,1.17.24,1.59.66.42.42.66.99.66,1.59s-.24,1.17-.66,1.59c-.42.42-.99.66-1.59.66s-1.17-.24-1.59-.66c-.42-.42-.66-.99-.66-1.59,0-1.25,1-2.25,2.25-2.25ZM0,0h3.68l1.06,2.25h16.64c.3,0,.58.12.8.33.21.21.33.5.33.8,0,.19-.06.38-.14.56l-4.03,7.28c-.38.69-1.12,1.16-1.97,1.16H7.99l-1.01,1.83-.03.14c0,.07.03.15.08.2.05.05.12.08.2.08h13.03v2.25H6.75c-.6,0-1.17-.24-1.59-.66-.42-.42-.66-.99-.66-1.59,0-.39.1-.76.27-1.08l1.53-2.76L2.25,2.25H0V0ZM6.75,18c.6,0,1.17.24,1.59.66.42.42.66.99.66,1.59s-.24,1.17-.66,1.59c-.42.42-.99.66-1.59.66s-1.17-.24-1.59-.66c-.42-.42-.66-.99-.66-1.59,0-1.25,1-2.25,2.25-2.25ZM16.88,10.13l3.13-5.63H5.78l2.66,5.63h8.44Z"/>
-                      </svg>
-                      カートに入れておく
-                  </button>
-                  <p class="success" style="display: none;">商品がカートに追加されました</p>
-                  <p class="error" style="display: none;">商品の追加に失敗しました。</p>
-              </div>
+                    <button type="button" class="add-to-cart-btn cart-btn" data-product-id="{{ product.variants.first.id }}">
+                        <svg id="_layer_1" data-name="layer1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22.5 22.5">
+                        <defs>
+                            <style>
+                            .cls-1 {
+                                fill: #010642;
+                                stroke-width: 0px;
+                            }
+                            </style>
+                        </defs>
+                        <path class="cls-1" d="M18,18c.6,0,1.17.24,1.59.66.42.42.66.99.66,1.59s-.24,1.17-.66,1.59c-.42.42-.99.66-1.59.66s-1.17-.24-1.59-.66c-.42-.42-.66-.99-.66-1.59,0-1.25,1-2.25,2.25-2.25ZM0,0h3.68l1.06,2.25h16.64c.3,0,.58.12.8.33.21.21.33.5.33.8,0,.19-.06.38-.14.56l-4.03,7.28c-.38.69-1.12,1.16-1.97,1.16H7.99l-1.01,1.83-.03.14c0,.07.03.15.08.2.05.05.12.08.2.08h13.03v2.25H6.75c-.6,0-1.17-.24-1.59-.66-.42-.42-.66-.99-.66-1.59,0-.39.1-.76.27-1.08l1.53-2.76L2.25,2.25H0V0ZM6.75,18c.6,0,1.17.24,1.59.66.42.42.66.99.66,1.59s-.24,1.17-.66,1.59c-.42.42-.99.66-1.59.66s-1.17-.24-1.59-.66c-.42-.42-.66-.99-.66-1.59,0-1.25,1-2.25,2.25-2.25ZM16.88,10.13l3.13-5.63H5.78l2.66,5.63h8.44Z"/>
+                        </svg>
+                        カートに入れておく
+                </div>
             </li>
-          {% endfor %}
+            {% endfor %}
 
             <script>
-              document.addEventListener('DOMContentLoaded', function() {
-                var addToCartButton = document.querySelector('.add-to-cart-btn'); // カートに追加ボタンを取得
-                var quantityInput = document.getElementById('quantity'); // 数量入力フィールドを取得
-                var successMessage = document.querySelector('.success');// 成功時のテキスト要素を取得
-                var errorMessage = document.querySelector('.error');// 失敗時のテキスト要素を取得
-
-                addToCartButton.addEventListener('click', function() {
-                  var productId = this.getAttribute('data-product-id');// バリアントIDをbuttonタグのdata属性から取得
-                  var stockQuantity = parseInt(this.getAttribute('data-stock-quantity'), 10); // 在庫数をbuttonタグのdata属性から取得
-                  var quantity = parseInt(quantityInput.value, 10) || 1;// 入力された数量を整数に変換、デフォルトは１とする
-
-                  if (quantity > stockQuantity) {
-                    // 在庫数を超える数量が選択された場合
-                    successMessage.style.display = 'none';
-                    errorMessage.style.display = 'block';
-                    errorMessage.textContent = '在庫が不足しています。';
-                    return; // ここで処理を中断
-                  }
-
-                  // ShopifyのカートAPIが要求するデータフォーマットでリクエストするための準備
-                  var requestData = {
-                    items: [{
-                      id: productId, // どの商品をカートへ追加するのか
-                      quantity: quantity // 何個追加するのか
-                    }]
-                  };
-                  //上記をfetchAPIを使用して非同期的にサーバーリクエストを送信する
-                  fetch('/cart/add.js', { 
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json' 
-                    },
-                    body: JSON.stringify(requestData) //requestDataオブジェクトをJSON文字列に変換する
-                  })
-                  .then(response => {
-                    if (response.ok) {
-                      // 商品がカートに追加された場合
-                      successMessage.style.display = 'block'; // 成功メッセージを表示
-                      errorMessage.style.display = 'none'; // エラーメッセージを非表示
-                      // 成功メッセージを数秒後に自動で非表示にする
-                      setTimeout(function() {
-                        successMessage.style.display = 'none';
-                      }, 3000);
-                    } else {
-                      // 商品の追加に失敗した場合
-                      successMessage.style.display = 'none'; // 成功メッセージを非表示
-                      errorMessage.style.display = 'block'; // エラーメッセージを表示
-                      errorMessage.textContent = '商品の追加に失敗しました。';
-                    }
-                  })
-                  .catch(error => {
-                    console.error('エラーが発生しました。', error);
-                    // エラーが発生した場合
-                    successMessage.style.display = 'none'; // 成功メッセージを非表示
-                    errorMessage.style.display = 'block'; // エラーメッセージを表示
-                    errorMessage.textContent = '商品の追加に失敗しました。';
-                  });
+                document.addEventListener('DOMContentLoaded', function() {
+                    var addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+                    addToCartButtons.forEach(function(button) {
+                        button.addEventListener('click', function() {
+                            var variantId = this.getAttribute('data-variant-id');
+                            var quantity = 1; // ここで数量を設定、または入力から取得する
+                            fetch('/cart/add.js', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    items: [{
+                                        id: variantId,
+                                        quantity: quantity
+                                    }]
+                                })
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log('商品がカートに追加されました', data);
+                                alert('商品がカートに追加されました！');
+                                // ここでカートのUIを更新するコードを追加することもできます。
+                            })
+                            .catch(error => {
+                                console.error('カートへの追加に失敗しました。', error);
+                                alert('カートへの追加に失敗しました。');
+                            });
+                        });
+                    });
                 });
-              });
             </script>
 
             {% comment %} <div class="cart-btn-wrapper" style="margin-bottom: 2rem;">

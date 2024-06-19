@@ -79,10 +79,47 @@
                 </div>
                 </div>
                 <div class="p-btn-wrapper">
-                <button type="button" class="c-btn">カートに入れておく</button>
+                <button type="button" class="add-to-cart-btn c-btn" data-variant-id="{{ product.variants.first.id }}">
+                    カートに入れておく
+                </button>
                 <button type="submit" class="c-btn b-btn">お会計に進む</button>
                 </div>
             </form>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    var addToCartButton = document.querySelector('.add-to-cart-btn'); // カートに追加ボタンを取得
+                    addToCartButton.addEventListener('click', function() {
+                        var variantId = this.getAttribute('data-variant-id');
+                        var quantityInput = document.getElementById('quantity'); // 数量入力フィールドを取得
+                        var quantity = parseInt(quantityInput.value, 10) || 1; // 入力された数量を整数に変換、デフォルトは1
+
+                        fetch('/cart/add.js', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                items: [{
+                                    id: variantId,
+                                    quantity: quantity
+                                }]
+                            })
+                        })
+                        
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log('商品がカートに追加されました', data);
+                            alert('商品がカートに追加されました！');
+                            // ここでカートのUIを更新するコードを追加することもできます。
+                        })
+                        .catch(error => {
+                            console.error('カートへの追加に失敗しました。', error);
+                            alert('カートへの追加に失敗しました。');
+                        });
+                    });
+                });
+            </script>
             </div>
         </div>
         </div>
