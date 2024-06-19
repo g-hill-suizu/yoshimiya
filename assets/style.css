@@ -4851,7 +4851,7 @@ news_detail
 
 .highlight {
   background-color: #010642;
-  color: #fff;
+  color: #fff !important;
 }
 .highlight .cls-1 {
   fill: #fff;

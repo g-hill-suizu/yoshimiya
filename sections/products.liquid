@@ -198,29 +198,29 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         const url = window.location.href;
-        const items = document.querySelectorAll('.item-card02');
-        
-        let targetTag = '';
+        const items = document.querySelectorAll('.thumn-box');
 
-        // URLやタグに基づいてターゲットタグを設定
+        let targetUrl = '';
+
+        // URLに基づいてターゲットURLを設定
         if (url.includes('/collections/andagi')) {
-            targetTag = 'サーターアンダギー';
+            targetUrl = '/collections/andagi/';
         } else if (url.includes('/collections/chinsukou')) {
-            targetTag = 'ちんすこう';
+            targetUrl = '/collections/chinsukou/';
         } else if (url.includes('/collections/brown-sugar')) {
-            targetTag = '黒糖/黒糖菓子';
+            targetUrl = '/collections/brown-sugar/';
         } else if (url.includes('/collections/gift')) {
-            targetTag = 'ギフト';
+            targetUrl = '/collections/gift/';
         } else if (url.includes('/collections/favorite')) {
-            targetTag = '店長の推し！THE 沖縄';
+            targetUrl = '/collections/favorite/';
         } else if (url.includes('/collections/other')) {
-            targetTag = 'その他';
+            targetUrl = '/collections/other/';
         }
 
         items.forEach(function(item) {
-            const tags = item.querySelector('.cate').textContent.split(', ');
-            if (tags.includes(targetTag)) {
-            item.classList.add('highlight');
+            const link = item.querySelector('a');
+            if (link && link.getAttribute('href') === targetUrl) {
+            link.classList.add('highlight');
             }
         });
     });
