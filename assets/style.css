@@ -611,7 +611,7 @@ header
   border-radius: 4px;
 }
 .ham-trigger span:nth-of-type(1) {
-  top: 12px;
+  top: 11px;
   animation: move-bar01 0.3s forwards;
 }
 .ham-trigger span:nth-of-type(2) {
@@ -1393,7 +1393,7 @@ top
   }
 }
 .about .inner .about_inner {
-  max-width: 520px;
+  max-width: 750px;
   margin: 0 auto;
   text-align: center;
   justify-content: center;
@@ -2304,7 +2304,7 @@ about
 }
 .about_mv .about_inner {
   display: flex;
-  justify-content: space-between;
+  gap: 50px;
   max-width: 1200px;
   margin: 139px auto 0 auto;
 }
@@ -2401,7 +2401,7 @@ about
 .about_mv .about_inner .mv_right .mv_text {
   max-width: 520px;
   margin: auto;
-  padding: 120px 0 0 50px;
+  padding: 120px 0 0 0;
   font-size: 1.5rem;
   font-weight: 700;
   line-height: 2;
@@ -3563,6 +3563,7 @@ contact
 }
 .contact_wrap .contact_text .link_faq:hover {
   opacity: 0.7;
+  text-decoration: underline;
 }
 @media screen and (max-width: 599px) {
   .contact_wrap .contact_text {

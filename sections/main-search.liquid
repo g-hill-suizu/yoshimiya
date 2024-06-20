@@ -101,8 +101,8 @@
                 {%- endif -%}
               >
               <label class="field__label" for="Search-In-Template">{{ 'general.search.search' | t }}</label>
-              <input name="options[prefix]" type="hidden" value="last">
-
+              {% comment %} <input name="options[prefix]" type="hidden" value="last"> {% endcomment %}
+              <input name="type" type="hidden" value="product">
               {%- if settings.predictive_search_enabled -%}
                 <div class="predictive-search predictive-search--search-template" tabindex="-1" data-predictive-search>
                   {%- render 'loading-spinner', class: 'predictive-search__loading-state' -%}
@@ -206,7 +206,7 @@
           class="facets-vertical page-width"
         {% endif %}
       >
-        {%- if search.filters != empty -%}
+        {% comment %} {%- if search.filters != empty -%}
           {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
             <aside
               aria-labelledby="verticalTitle"
@@ -223,7 +223,7 @@
               %}
             </aside>
           {%- endif -%}
-        {%- endif -%}
+        {%- endif -%} {% endcomment %}
         <div class="product-grid-container" id="ProductGridContainer">
           {%- if search.results.size == 0 and search.filters != empty -%}
             <div
