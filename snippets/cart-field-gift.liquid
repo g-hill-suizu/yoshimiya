@@ -1,0 +1,18 @@
+<div class="cart-custom-field field-derively-time">
+    <p>のし</p>
+    <select id="" name="attributes[のし]" required>
+        <option value="" select>選択する</option>
+        <option value="なし"{% if cart.attributes["のしシール"] == "なし" %} selected{% endif %}>なし</option>
+        <option value="お歳暮"{% if cart.attributes["のしシール"] == "お歳暮" %} selected{% endif %}>お歳暮</option>
+        <option value="お中元"{% if cart.attributes["のしシール"] == "お中元" %} selected{% endif %}>お中元</option>
+        <option value="内祝い"{% if cart.attributes["のしシール"] == "内祝い" %} selected{% endif %}>内祝い</option>
+    </select>
+</div>
+
+<style>
+    select {
+        background: #fff;
+        width:70%;
+        padding: 1rem;
+    }
+</style>

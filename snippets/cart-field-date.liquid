@@ -1,0 +1,49 @@
+{{ '//code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css' | stylesheet_tag }}
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" defer="defer"></script>
+
+<div class="cart-custom-field field-derively-date">
+    <p>
+        配達ご指定日<br>
+        <span>※必ずお受け取りできる日付をご指定ください</span>
+    </p>
+    <input id="date" type="text" name="attributes[お届け希望日]" value="{{ cart.attributes.date }}" placeholder="選択する" required/>
+</div>
+
+<style>
+    .cart-custom-field{
+        margin-bottom: 30px;
+    }
+    .cart-custom-field span{
+            font-size: 1.3rem;
+    }
+    input {
+        background: #fff;
+        width:70%;
+        padding: 1rem;
+    }
+</style>
+
+<script>
+    window.onload = function() {
+        if (window.jQuery) {
+        let $ = window.jQuery;
+
+        $(function() {
+            $("#date").datepicker({
+            dateFormat: 'yy/mm/dd (DD)',
+            yearSuffix: '年',
+            showMonthAfterYear: true,
+            monthNames: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+            dayNames: ['日', '月', '火', '水', '木', '金', '土'],
+            dayNamesMin: ['日', '月', '火', '水', '木', '金', '土'],
+            minDate: +10, 
+            maxDate: '+6M',
+            beforeShowDay: function(date) { //月、火を選択不可にする
+                var day = date.getDay();
+                return [(day !== 1 && day !== 2), ''];
+            }
+            });
+        });
+        }
+    }
+</script>

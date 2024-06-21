@@ -1,0 +1,112 @@
+{% if linklists.gift-box.links.size > 0 and linklists.gift-box.links.first.type == 'product_link' %}
+    
+    <div id="is-a-gift" style="clear: left; margin: 30px 0" class="clearfix rte">
+        <p>
+            <input id="gift-box" type="checkbox" name="attributes[ギフトボックス]" value="yes" {% if cart.attributes['ギフトボックス'] %} checked="checked" {% endif %} style="float: none" />
+            <label for="gift-box" style="display:inline; padding-left: 5px; float: none;">
+                {{ linklists.gift-box.links.first.object.price | money }}&emsp;ギフトラッピング（箱）ご希望の場合はチェックを入れてください。
+            </label>
+        </p>
+        <p>
+            <label style="display:block" for="gift-box-note">メッセージラベル（無料）:</label>
+            <textarea name="attributes[ギフトボックスメッセージ]" id="gift-box-note">{{ cart.attributes['ギフトボックスメッセージ'] }}</textarea>
+        </p>
+    </div>
+    
+    {% assign id = linklists.gift-box.links.first.object.variants.first.id %} 
+    {% assign box_wraps_in_cart = 0 %} 
+    {% for item in cart.items %}
+        {% if item.id == id %}
+            {% assign box_wraps_in_cart = item.quantity %}
+        {% endif %}
+    {% endfor %}
+    
+    <style>
+        #updates_{{ id }} { display: none; }
+        textarea {
+            background: #fff;
+            width:70%;
+            padding: 1rem;
+        }
+    </style>
+    
+    <script>
+        Shopify.Cart = Shopify.Cart || {};
+        Shopify.Cart.GiftBox = {};
+    
+        Shopify.Cart.GiftBox.set = function() {
+            var headers = new Headers({ 'Content-Type': 'application/json' });
+            var request = {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify({ updates: { {{ id }}: 1 }, attributes: { 'ギフトボックス': true } })
+            };
+            fetch('/cart/update.js', request).then(function() {
+                location.href = '/cart';
+            });
+        }
+    
+        Shopify.Cart.GiftBox.remove = function() {
+            var headers = new Headers({ 'Content-Type': 'application/json' });
+            var request = {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify({ updates: { {{ id }}: 0 }, attributes: { 'ギフトボックス': '', 'ギフトボックスメッセージ': '' } })
+            };
+            fetch('/cart/update.js', request).then(function() {
+                location.href = '/cart';
+            });
+        }
+    
+        // If we have nothing but gift-box items in the cart.
+        {% if cart.items.size == 1 and box_wraps_in_cart > 0 %}
+        document.addEventListener("DOMContentLoaded", function(){
+            Shopify.Cart.GiftBox.remove();
+        });
+        // If we have more than one gift-box item in the cart.
+        {% elsif box_wraps_in_cart > 1 %}
+        document.addEventListener("DOMContentLoaded", function(){
+            Shopify.Cart.GiftBox.set();
+        });
+        // If we have a gift-box item in the cart but our gift-box cart attribute has not been set.
+        {% elsif box_wraps_in_cart > 0 and cart.attributes['ギフトボックス'] == blank %}
+        document.addEventListener("DOMContentLoaded", function(){
+            Shopify.Cart.GiftBox.set();
+        });
+        // If we have no gift-box item in the cart but our gift-box cart attribute has been set.
+        {% elsif box_wraps_in_cart == 0 and cart.attributes['ギフトボックス'] != blank %}
+        document.addEventListener("DOMContentLoaded", function(){
+            Shopify.Cart.GiftBox.set();
+        });
+        {% endif %}
+    
+        // When the gift-box checkbox is checked or unchecked.
+        document.addEventListener("DOMContentLoaded", function(){
+            document.querySelector('[name="attributes[ギフトボックス]"]').addEventListener("change", function(event) {
+                if (event.target.checked) {
+                    Shopify.Cart.GiftBox.set();
+                } else {
+                    Shopify.Cart.GiftBox.remove();
+                }
+            });
+    
+            document.querySelector('#gift-box-note').addEventListener("change", function(evt) {
+                var note = evt.target.value;
+                var headers = new Headers({ 'Content-Type': 'application/json' });
+                var request = {
+                    method: 'POST',
+                    headers: headers,
+                    body: JSON.stringify({ attributes: { 'ギフトボックスメッセージ': note } })
+                };
+                fetch('/cart/update.js', request);
+            });
+        });
+    </script>
+    
+    {% else %}
+    
+    <p style="clear: left; margin: 30px 0" class="rte">
+        ギフトボックススクリプトをショッピングカートに追加しようとしましたが、 <code>gift-box</code> というハンドルのリンクリストがなく、ギフトボックス商品へのリンクが含まれていないため、動作しません。詳細は<a href="https://help.shopify.com/manual/online-store/themes/os/customize/add-gift-wrap-option" target="_blank" rel="noopener noreferrer nofollow">こちら</a>をご覧ください。
+    </p>
+    
+    {% endif %}

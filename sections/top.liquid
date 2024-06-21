@@ -83,7 +83,7 @@
             <br>自社製造のサーターアンダギーは、その香ばしさとふんわりとした食感が特徴で、
             <br>多くのお客様にご好評をいただいています。
             <br>また、ちんすこうや黒糖菓子の種類も豊富に取り揃えており、幅広い味わいを楽しめます。
-            <br>小さなお店ながらも、商品数の多さには定評があり、
+            <br>小さなお店ながらも、<br class="sp">商品数の多さには定評があり、
             <br>訪れるたびに新しい発見があることでしょう。
             <br>ぜひ一度、良味屋で美味しい沖縄菓子をお試しください。
         </p>
@@ -125,7 +125,7 @@
                     <div class="img_box obj-fit"><img src="{{ product.featured_image.src | img_url: 'master' }}" alt=""></div>
                     <p class="cate_name">
                         {% for collection in product.collections %}
-                        {% assign excluded_collections = 'all' | split: ',' %}
+                        {% assign excluded_collections = 'all , tax' | split: ',' %}
                         {% unless excluded_collections contains collection.handle %}
                             {{ collection.title }}
                         {% endunless %}

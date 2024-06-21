@@ -448,6 +448,13 @@
       >
         {{ 'accessibility.loading' | t }}
       </p>
+
+      {% render 'gift-wrapping' %}
+      {% render 'gift-box' %}
+      {% render 'noshi' %}
+      {% comment %} {% render 'cart-field-date' %} {% endcomment %}
+      {% comment %} {% render 'cart-field-time' %}
+      {% render 'cart-field-gift' %} {% endcomment %}
     </form>
   </div>
 </cart-items>

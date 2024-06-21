@@ -1,0 +1,29 @@
+<div class="cart-custom-field field-derively-time">
+    <p>
+        配達ご指定時間<br>
+        <span>※必ずお受け取りできる時間をご指定ください</span>
+    </p>
+    <select id="" name="attributes[配達ご指定時間]" required>
+        <option value="" selected>選択する</option>
+        <option value="8:00〜12:00"{% if cart.attributes["配達ご指定時間"] == "8:00〜12:00" %} selected{% endif %}>8:00〜12:00</option>
+        <option value="12:00〜14:00"{% if cart.attributes["配達ご指定時間"] == "12:00〜14:00" %} selected{% endif %}>12:00〜14:00</option>
+        <option value="14:00〜16:00"{% if cart.attributes["配達ご指定時間"] == "14:00〜16:00" %} selected{% endif %}>14:00〜16:00</option>
+        <option value="18:00～20:00"{% if cart.attributes["配達ご指定時間"] == "18:00～20:00" %} selected{% endif %}>18:00～20:00</option>
+        <option value="19:00～21:00"{% if cart.attributes["配達ご指定時間"] == "19:00～21:00" %} selected{% endif %}>19:00～21:00</option>
+        <option value="20:00～21:00"{% if cart.attributes["配達ご指定時間"] == "20:00～21:00" %} selected{% endif %}>20:00～21:00</option>
+    </select>
+</div>
+
+<style>
+    .cart-custom-field{
+        margin-bottom: 30px;
+    }
+    .cart-custom-field span{
+            font-size: 1.3rem;
+    }
+    select {
+        background: #fff;
+        width:70%;
+        padding: 1rem;
+    }
+</style>

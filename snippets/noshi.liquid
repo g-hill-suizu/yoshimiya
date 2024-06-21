@@ -1,0 +1,129 @@
+{% if linklists.noshi.links.size > 0 and linklists.noshi.links.first.type == 'product_link' %}
+    
+    <div id="is-a-gift" style="clear: left; margin: 30px 0" class="clearfix rte">
+        <p>
+            <input id="noshi" type="checkbox" name="attributes[熨斗]" value="yes" {% if cart.attributes['熨斗'] %} checked="checked" {% endif %} style="float: none" />
+            <label for="noshi" style="display:inline; padding-left: 5px; float: none;">
+                {{ linklists.noshi.links.first.object.price | money }}&emsp;熨斗をご希望の場合はチェックを入れてください。
+            </label>
+        </p>
+        <p>
+            <label style="display:block" for="gift-item">表書き:</label>
+            <textarea name="attributes[表書き]" id="gift-item">{{ cart.attributes['表書き'] }}</textarea>
+        </p>
+        <p>
+            <label style="display:block" for="gift-name">名入れ:</label>
+            <textarea name="attributes[名入れ]" id="gift-name">{{ cart.attributes['名入れ'] }}</textarea>
+        </p>
+    </div>
+    
+    {% assign id = linklists.noshi.links.first.object.variants.first.id %} 
+    {% assign noshi_in_cart = 0 %} 
+    {% for item in cart.items %}
+        {% if item.id == id %}
+            {% assign noshi_in_cart = item.quantity %}
+        {% endif %}
+    {% endfor %}
+    
+    <style>
+        #updates_{{ id }} { display: none; }
+        textarea {
+            background : #fff;
+            width: 70%;
+            padding: 1rem;
+        }
+    </style>
+    
+    <script>
+    
+        Shopify.Cart = Shopify.Cart || {};
+    
+        Shopify.Cart.Noshi = {};
+    
+        Shopify.Cart.Noshi.set = function() {
+            var headers = new Headers({ 'Content-Type': 'application/json' });
+            var request = {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify({ updates: { {{ id }}: 1 }, attributes: { '熨斗': true } })
+            };
+            fetch('/cart/update.js', request).then(function() {
+                location.href = '/cart';
+            });
+        }
+    
+        Shopify.Cart.Noshi.remove = function() {
+            var headers = new Headers({ 'Content-Type': 'application/json' });
+            var request = {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify({ updates: { {{ id }}: 0 }, attributes: { '熨斗': '', '表書き': '', '名入れ': '' } })
+            };
+            fetch('/cart/update.js', request).then(function() {
+                location.href = '/cart';
+            });
+        }
+    
+        // If we have nothing but noshi items in the cart.
+        {% if cart.items.size == 1 and noshi_in_cart > 0 %}
+        document.addEventListener("DOMContentLoaded", function(){
+            Shopify.Cart.Noshi.remove();
+        });
+        // If we have more than one noshi item in the cart.
+        {% elsif noshi_in_cart > 1 %}
+        document.addEventListener("DOMContentLoaded", function(){
+            Shopify.Cart.Noshi.set();
+        });
+        // If we have a noshi item in the cart but our noshi cart attribute has not been set.
+        {% elsif noshi_in_cart > 0 and cart.attributes['熨斗'] == blank %}
+        document.addEventListener("DOMContentLoaded", function(){
+            Shopify.Cart.Noshi.set();
+        });
+        // If we have no noshi item in the cart but our noshi cart attribute has been set.
+        {% elsif noshi_in_cart == 0 and cart.attributes['熨斗'] != blank %}
+        document.addEventListener("DOMContentLoaded", function(){
+            Shopify.Cart.Noshi.set();
+        });
+        {% endif %}
+    
+        // When the noshi checkbox is checked or unchecked.
+        document.addEventListener("DOMContentLoaded", function(){
+            document.querySelector('[name="attributes[熨斗]"]').addEventListener("change", function(event) {
+                if (event.target.checked) {
+                    Shopify.Cart.Noshi.set();
+                } else {
+                    Shopify.Cart.Noshi.remove();
+                }
+            });
+    
+            document.querySelector('#gift-item').addEventListener("change", function(evt) {
+                var item = evt.target.value;
+                var headers = new Headers({ 'Content-Type': 'application/json' });
+                var request = {
+                    method: 'POST',
+                    headers: headers,
+                    body: JSON.stringify({ attributes: { '表書き': item } })
+                };
+                fetch('/cart/update.js', request);
+            });
+    
+            document.querySelector('#gift-name').addEventListener("change", function(evt) {
+                var name = evt.target.value;
+                var headers = new Headers({ 'Content-Type': 'application/json' });
+                var request = {
+                    method: 'POST',
+                    headers: headers,
+                    body: JSON.stringify({ attributes: { '名入れ': name } })
+                };
+                fetch('/cart/update.js', request);
+            });
+        });
+    </script>
+    
+    {% else %}
+    
+    <p style="clear: left; margin: 30px 0" class="rte">
+        熨斗スクリプトをショッピングカートに追加しようとしましたが、 <code>noshi</code> というハンドルのリンクリストがなく、熨斗商品へのリンクが含まれていないため、動作しません。詳細は<a href="https://help.shopify.com/manual/online-store/themes/os/customize/add-gift-wrap-option" target="_blank" rel="noopener noreferrer nofollow">こちら</a>をご覧ください。
+    </p>
+    
+{% endif %}

@@ -611,7 +611,7 @@ header
   border-radius: 4px;
 }
 .ham-trigger span:nth-of-type(1) {
-  top: 11px;
+  top: 12px;
   animation: move-bar01 0.3s forwards;
 }
 .ham-trigger span:nth-of-type(2) {
@@ -1337,7 +1337,7 @@ top
 @media screen and (max-width: 599px) {
   .about .about_bg_sp {
     width: 100%;
-    height: 150px;
+    height: auto;
     position: absolute;
     display: block;
     top: -5.1282051282vw;
@@ -5472,11 +5472,11 @@ news_detail
   line-height: 2;
   font-size: 1.8rem;
   font-weight: 500;
-  padding-left: 1.2rem;
+  padding-left: 1rem;
 }
-.p-merchandise__detail-content .spin_erase,
-.p-merchandise__detail-content .spin_erase::-webkit-inner-spin-button,
-.p-merchandise__detail-content .spin_erase::-webkit-outer-spin-button {
+.p-merchandise__detail-content .product-quantity .spin_erase,
+.p-merchandise__detail-content .product-quantity .spin_erase::-webkit-inner-spin-button,
+.p-merchandise__detail-content .product-quantity .spin_erase::-webkit-outer-spin-button {
   -webkit-appearance: none !important;
   margin: 0 !important;
   -moz-appearance: textfield !important;
@@ -5792,7 +5792,7 @@ wholesale
 }
 @media screen and (max-width: 599px) {
   .modaal-wrapper .modaal-container {
-    height: 97vh;
+    height: 85vh;
     overflow-y: scroll;
     padding-top: 3rem;
   }
@@ -5956,6 +5956,7 @@ wholesale
 }
 @media screen and (max-width: 599px) {
   .modaal-wrapper .modaal-container .modaal-close {
+    top: 50px;
     width: 3rem;
     height: 3rem;
     z-index: 500;
@@ -5981,6 +5982,13 @@ wholesale
     left: 15px;
     height: 18px;
   }
+}
+
+/*************************************************
+その他Shopifyデフォルトページの調整
+*************************************************/
+#checkout {
+  background-color: #010642;
 }
 
 /**
