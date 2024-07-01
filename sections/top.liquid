@@ -125,7 +125,7 @@
                     <div class="img_box obj-fit"><img src="{{ product.featured_image.src | img_url: 'master' }}" alt=""></div>
                     <p class="cate_name">
                         {% for collection in product.collections %}
-                        {% assign excluded_collections = 'all , tax' | split: ',' %}
+                        {% assign excluded_collections = 'all,tax' | split: ',' %}
                         {% unless excluded_collections contains collection.handle %}
                             {{ collection.title }}
                         {% endunless %}

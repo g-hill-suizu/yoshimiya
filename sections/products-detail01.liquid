@@ -15,7 +15,7 @@
                     {% for image in product.images %}
                     <div class="swiper-slide">
                         <div class="p-img-wrapper obj-fit">
-                        <img src="{{ image.src | img_url: 'master' }}" alt="">
+                            <img src="{{ image | img_url: '483x483' }}" alt="{{ article.title }}">
                         </div>
                     </div>
                     {%- endfor -%}
@@ -29,7 +29,7 @@
                         class="thumb-link obj-fit"
                         href="javascript:void(0);"
                         onclick="thumbnail({{ forloop.index }})">
-                        <img src="{{ image.src | img_url: 'master' }}" alt="">
+                        <img src="{{ image.src | img_url: 'master' }}" alt="{{ article.title }}">
                     </a>
                 </div>
                 {%- endfor -%}
@@ -41,7 +41,7 @@
             {% assign current_variant = product.selected_or_first_available_variant %}
             <p class="cate-name">
                 {% for collection in product.collections %}
-                {% assign excluded_collections = 'all' | split: ',' %}
+                {% assign excluded_collections = 'all,tax' | split: ',' %}
                 {% unless excluded_collections contains collection.handle %}
                     {{ collection.title }}
                 {% endunless %}

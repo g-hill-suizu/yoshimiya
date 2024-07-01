@@ -41,7 +41,7 @@
                                                     {% for image in images %}
                                                         <div class="swiper-slide">
                                                             <div class="h-img-wrapper obj-fit">
-                                                                <img src="{{ image | img_url }}" alt="{{ article.title }}">
+                                                                <img src="{{ image | img_url: '483x483' }}" alt="{{ article.title }}">
                                                             </div>
                                                         </div>
                                                     {% endfor %}
