@@ -1,0 +1,111 @@
+{% if linklists.gift-message.links.size > 0 and linklists.gift-message.links.first.type == 'product_link' %}
+    
+    <div id="is-a-gift" style="clear: left; margin: 30px 0" class="clearfix rte">
+        <p>
+            <input id="gift-message" type="checkbox" name="attributes[メッセージラベル]" value="yes" {% if cart.attributes['メッセージラベル'] %} checked="checked" {% endif %} style="float: none" />
+            <label for="gift-message" style="display:inline; padding-left: 5px; float: none;">
+                {{ linklists.gift-message.links.first.object.price | money }}&emsp;メッセージラベルご希望の場合はチェックを入れてください。
+            </label>
+        </p>
+        <p id="gift-message-note-section" style="display: {% if cart.attributes['メッセージラベル'] %}block{% else %}none{% endif %};">
+            <label style="display:block" for="gift-message-note">メッセージ内容:</label>
+            <textarea name="attributes[ギフトボックスメッセージ]" id="gift-message-note">{{ cart.attributes['ギフトボックスメッセージ'] }}</textarea>
+        </p>
+    </div>
+    
+    {% assign id = linklists.gift-message.links.first.object.variants.first.id %} 
+    {% assign box_wraps_in_cart = 0 %} 
+    {% for item in cart.items %}
+        {% if item.id == id %}
+            {% assign box_wraps_in_cart = item.quantity %}
+        {% endif %}
+    {% endfor %}
+    
+    <style>
+        #updates_{{ id }} { display: none; }
+        textarea {
+            background: #fff;
+            width: 70%;
+            padding: 1rem;
+        }
+    </style>
+    
+    <script>
+        Shopify.Cart = Shopify.Cart || {};
+        Shopify.Cart.Giftmessage = {};
+    
+        Shopify.Cart.Giftmessage.set = function() {
+            var headers = new Headers({ 'Content-Type': 'application/json' });
+            var request = {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify({ updates: { {{ id }}: 1 }, attributes: { 'メッセージラベル': true } })
+            };
+            fetch('/cart/update.js', request).then(function() {
+                document.getElementById('gift-message-note-section').style.display = 'block';
+                location.href = '/cart';
+            });
+        }
+    
+        Shopify.Cart.Giftmessage.remove = function() {
+            var headers = new Headers({ 'Content-Type': 'application/json' });
+            var request = {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify({ updates: { {{ id }}: 0 }, attributes: { 'メッセージラベル': '', 'ギフトボックスメッセージ': '' } })
+            };
+            fetch('/cart/update.js', request).then(function() {
+                document.getElementById('gift-message-note-section').style.display = 'none';
+                location.href = '/cart';
+            });
+        }
+    
+        // Check cart state and set or remove gift-message item.
+        {% if cart.items.size == 1 and box_wraps_in_cart > 0 %}
+        document.addEventListener("DOMContentLoaded", function(){
+            Shopify.Cart.Giftmessage.remove();
+        });
+        {% elsif box_wraps_in_cart > 1 %}
+        document.addEventListener("DOMContentLoaded", function(){
+            Shopify.Cart.Giftmessage.set();
+        });
+        {% elsif box_wraps_in_cart > 0 and cart.attributes['メッセージラベル'] == blank %}
+        document.addEventListener("DOMContentLoaded", function(){
+            Shopify.Cart.Giftmessage.set();
+        });
+        {% elsif box_wraps_in_cart == 0 and cart.attributes['メッセージラベル'] != blank %}
+        document.addEventListener("DOMContentLoaded", function(){
+            Shopify.Cart.Giftmessage.set();
+        });
+        {% endif %}
+    
+        // Handle checkbox change.
+        document.addEventListener("DOMContentLoaded", function(){
+            document.querySelector('[name="attributes[メッセージラベル]"]').addEventListener("change", function(event) {
+                if (event.target.checked) {
+                    Shopify.Cart.Giftmessage.set();
+                } else {
+                    Shopify.Cart.Giftmessage.remove();
+                }
+            });
+    
+            document.querySelector('#gift-message-note').addEventListener("change", function(evt) {
+                var note = evt.target.value;
+                var headers = new Headers({ 'Content-Type': 'application/json' });
+                var request = {
+                    method: 'POST',
+                    headers: headers,
+                    body: JSON.stringify({ attributes: { 'ギフトボックスメッセージ': note } })
+                };
+                fetch('/cart/update.js', request);
+            });
+        });
+    </script>
+    
+    {% else %}
+    
+    <p style="clear: left; margin: 30px 0" class="rte">
+        メッセージラベルスクリプトをショッピングカートに追加しようとしましたが、 <code>gift-message</code> というハンドルのリンクリストがなく、ギフトボックス商品へのリンクが含まれていないため、動作しません。詳細は<a href="https://help.shopify.com/manual/online-store/themes/os/customize/add-gift-wrap-option" target="_blank" rel="noopener noreferrer nofollow">こちら</a>をご覧ください。
+    </p>
+    
+{% endif %}

@@ -7,10 +7,10 @@
                 {{ linklists.gift-box.links.first.object.price | money }}&emsp;ギフトラッピング（箱）ご希望の場合はチェックを入れてください。
             </label>
         </p>
-        <p>
+        {% comment %} <p>
             <label style="display:block" for="gift-box-note">メッセージラベル（無料）:</label>
             <textarea name="attributes[ギフトボックスメッセージ]" id="gift-box-note">{{ cart.attributes['ギフトボックスメッセージ'] }}</textarea>
-        </p>
+        </p> {% endcomment %}
     </div>
     
     {% assign id = linklists.gift-box.links.first.object.variants.first.id %} 
@@ -46,17 +46,17 @@
             });
         }
     
-        Shopify.Cart.GiftBox.remove = function() {
-            var headers = new Headers({ 'Content-Type': 'application/json' });
-            var request = {
-                method: 'POST',
-                headers: headers,
-                body: JSON.stringify({ updates: { {{ id }}: 0 }, attributes: { 'ギフトボックス': '', 'ギフトボックスメッセージ': '' } })
-            };
-            fetch('/cart/update.js', request).then(function() {
-                location.href = '/cart';
-            });
-        }
+        // Shopify.Cart.GiftBox.remove = function() {
+        //     var headers = new Headers({ 'Content-Type': 'application/json' });
+        //     var request = {
+        //         method: 'POST',
+        //         headers: headers,
+        //         body: JSON.stringify({ updates: { {{ id }}: 0 }, attributes: { 'ギフトボックス': '', 'ギフトボックスメッセージ': '' } })
+        //     };
+        //     fetch('/cart/update.js', request).then(function() {
+        //         location.href = '/cart';
+        //     });
+        // }
     
         // If we have nothing but gift-box items in the cart.
         {% if cart.items.size == 1 and box_wraps_in_cart > 0 %}
@@ -90,16 +90,16 @@
                 }
             });
     
-            document.querySelector('#gift-box-note').addEventListener("change", function(evt) {
-                var note = evt.target.value;
-                var headers = new Headers({ 'Content-Type': 'application/json' });
-                var request = {
-                    method: 'POST',
-                    headers: headers,
-                    body: JSON.stringify({ attributes: { 'ギフトボックスメッセージ': note } })
-                };
-                fetch('/cart/update.js', request);
-            });
+            // document.querySelector('#gift-box-note').addEventListener("change", function(evt) {
+            //     var note = evt.target.value;
+            //     var headers = new Headers({ 'Content-Type': 'application/json' });
+            //     var request = {
+            //         method: 'POST',
+            //         headers: headers,
+            //         body: JSON.stringify({ attributes: { 'ギフトボックスメッセージ': note } })
+            //     };
+            //     fetch('/cart/update.js', request);
+            // });
         });
     </script>
     
