@@ -9,6 +9,7 @@
     <div class="inner">
         <img src="https://cdn.shopify.com/s/files/1/0638/7833/2621/files/title_deco.svg" alt="">
         <h2>こちらもおすすめ</h2>
+        <div class="x_scroll" data-simplebar>
         <ul class="list_area list_wrap">
         {%- for product in recommend_item.value  -%}    
             <li>
@@ -28,6 +29,7 @@
             </li>
             {% endfor %}
         </ul>
+        </div>
     </div>
 </section>
 {%- endif -%}

@@ -371,25 +371,45 @@
                     <div class="swiper-wrapper">
                         {% assign blog_handle = 'news' %}
                         {% assign latest_posts = blogs[blog_handle].articles | slice: 0, 5 %}
-                        {% for article in blogs['news'].articles %}
+                        
+                        {% if latest_posts.size > 1 %}
+                        {% for article in latest_posts %}
                         <div class="swiper-slide">
                             <a href="{{ article.url }}">
                                 <div class="thumn-box obj-fit">
                                         <img src="{{ article.image.src | img_url: 'master' }}" alt="{{ article.image.alt }}">
                                     </div>
                                     <div class="cate">
-                                    <p>{{ article.tags | join: ', ' }}</p> <!-- 最初のタグを表示します。 -->
+                                        <p>{{ article.tags | join: ', ' }}</p> <!-- 最初のタグを表示します。 -->
                                     </div>
                                     <div class="date">
-                                    <p>{{ article.published_at | date: '%Y.%m.%d' }}</p>
+                                        <p>{{ article.published_at | date: '%Y.%m.%d' }}</p>
                                     </div>
                                     <div class="ttl">
+                                        <p>{{ article.title }}</p>
+                                </div>
+                            </a>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        {% assign article = latest_posts.first %}
+                        <div class="swiper-slide">
+                            <a href="{{ article.url }}">
+                                <div class="thumn-box obj-fit">
+                                    <img src="{{ article.image.src | img_url: 'master' }}" alt="{{ article.image.alt }}">
+                                </div>
+                                <div class="cate">
+                                    <p>{{ article.tags | join: ', ' }}</p>
+                                </div>
+                                <div class="date">
+                                    <p>{{ article.published_at | date: '%Y.%m.%d' }}</p>
+                                </div>
+                                <div class="ttl">
                                     <p>{{ article.title }}</p>
                                 </div>
                             </a>
-                            </div>
-                        {% endfor %}
-                        
+                        </div>
+                    {% endif %}
                     </div><!--swiper_wrapper-->
                 </div><!--swiper02-->
             </div><!--myswiper_wrapper-->

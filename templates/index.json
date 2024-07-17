@@ -54,6 +54,7 @@
       "blocks": {
         "banner_top01_UbqDMg": {
           "type": "banner-top01",
+          "disabled": true,
           "settings": {
             "image_banner": "shopify:\/\/shop_images\/banner_dammy.jpg",
             "link_banner": "shopify:\/\/collections\/all"

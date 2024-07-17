@@ -57,41 +57,36 @@ document.addEventListener('DOMContentLoaded', (event) => {
   });
 
   const swiper02 = new Swiper(".swiper02", {
-    loop: true,
+    loop: swiperSlides.length > 1, // スライド数が2以上の時のみループ
     slidesPerView: 3,
-    slidesPerView: 'auto',
     spaceBetween: 30,
     speed: 1500,
     touchRatio: .03,
     autoplay: {
       delay: 3000,
+      disableOnInteraction: false, // ユーザー操作後に自動再生を再開する
     },
     breakpoints: {
       320: {
         slidesPerView: 1.2,
         spaceBetween: 30,
-        speed: 1500,
       },
       // タブレット用の設定
       768: {
         slidesPerView: 2,
         spaceBetween: 20,
-        speed: 1500,
       },
       1200: {
         slidesPerView: 3,
         spaceBetween: 30,
-        speed: 1500,
       },
       1920: {
         slidesPerView: 4,
         spaceBetween: 30,
-        speed: 1500,
       },
       2400: {
         slidesPerView: 5,
         spaceBetween: 30,
-        speed: 1500,
       },
     },
     scrollbar: {

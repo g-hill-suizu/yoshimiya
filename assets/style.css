@@ -1254,7 +1254,7 @@ top
 .banner {
   max-width: 1200px;
   height: 200px;
-  margin: 76px auto;
+  margin: 76px auto 0 auto;
   border-radius: 20px;
   overflow: hidden;
 }
@@ -1301,6 +1301,7 @@ top
   position: relative;
   top: 0;
   right: 0;
+  margin-top: 76px;
 }
 @media screen and (max-width: 599px) {
   .about {
@@ -1551,11 +1552,15 @@ top
 }
 @media screen and (max-width: 1250px) {
   .wrapper .inner .x_scroll {
+    overflow-x: auto;
     white-space: nowrap;
     padding-bottom: 4rem;
     width: 107%;
     transform: translateX(-4rem);
     margin-left: 20px;
+    /* スクロールバーを非表示にする */
+    scrollbar-width: none; /* Firefox用 */
+    -ms-overflow-style: none; /* Internet Explorer 10+ 用 */
   }
 }
 @media screen and (max-width: 599px) {
@@ -1590,10 +1595,10 @@ top
     gap: 3rem;
   }
 }
-@media screen and (max-width: 1024px) {
-  .wrapper .inner .x_scroll .list_area li {
-    padding-bottom: 30px;
-  }
+.wrapper .inner .x_scroll .list_area li {
+  width: 220px;
+  height: auto;
+  flex: 0 0 auto; /* 要素が縮まないようにする */
 }
 .wrapper .inner .x_scroll .list_area li a.r_list {
   transition: all 0.3s;
@@ -1630,7 +1635,11 @@ top
 }
 .wrapper .inner .x_scroll .list_area li .item_text {
   font-size: 1.6rem;
+  line-height: 1.4;
   padding-bottom: 20px;
+  word-wrap: break-word; /* 追加 */
+  overflow-wrap: break-word; /* 追加 */
+  white-space: normal; /* 折り返しを有効にする */
 }
 @media screen and (max-width: 599px) {
   .wrapper .inner .x_scroll .list_area li .item_text {
@@ -4350,6 +4359,7 @@ news
 .news_inner .item-list .item-card .h-scale .right_wrap .main_txt {
   font-size: 1.5rem;
   opacity: 0.5;
+  line-height: 1.5;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -4486,12 +4496,15 @@ news_detail
 }
 .news_detail_wrap .news-details_content img {
   width: 100%;
-  height: 100%;
+  height: auto;
   aspect-ratio: 120/49;
   min-width: 0;
   border-radius: 20px;
   overflow: hidden;
-  height: auto;
+  display: block;
+  margin: 0 auto;
+  -o-object-fit: cover;
+     object-fit: cover; /* 画像をコンテナに合わせる */
 }
 @media screen and (max-width: 1024px) {
   .news_detail_wrap .news-details_content img {
@@ -5527,128 +5540,109 @@ news_detail
 
 .p_recommend {
   padding: 110px 0 0px 0;
+  margin-bottom: 60px;
 }
 @media screen and (max-width: 599px) {
   .p_recommend {
     padding: 60px 0 0 0;
   }
 }
-.p_recommend .list_area {
+@media screen and (max-width: 1250px) {
+  .p_recommend .x_scroll {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 4rem;
+    width: 107%;
+    transform: translateX(-4rem);
+    margin-left: 20px;
+    /* スクロールバーを非表示にする */
+    scrollbar-width: none; /* Firefox用 */
+    -ms-overflow-style: none; /* Internet Explorer 10+ 用 */
+  }
+}
+@media screen and (max-width: 599px) {
+  .p_recommend .x_scroll {
+    width: 104%;
+    transform: translateX(-2rem);
+  }
+}
+.p_recommend .x_scroll .simplebar-track.simplebar-horizontal {
+  background: #fff;
+  border-radius: 5px;
+  width: 100%;
+  height: 6px;
+  margin: 0 auto;
+}
+.p_recommend .x_scroll .simplebar-scrollbar {
+  background: #3F3B3A;
+  border-radius: 3px 0 0 3px;
+  height: 6px;
+  top: 0;
+}
+.p_recommend .x_scroll .list_area {
   padding-top: 60px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   text-align: left;
 }
-@media screen and (max-width: 1200px) {
-  .p_recommend .list_area {
+@media screen and (max-width: 1250px) {
+  .p_recommend .x_scroll .list_area {
     flex-wrap: nowrap;
     gap: 3rem;
   }
 }
-@media screen and (max-width: 1024px) {
-  .p_recommend .list_area li {
-    padding-bottom: 30px;
-  }
+.p_recommend .x_scroll .list_area li {
+  width: 220px;
+  height: auto;
+  flex: 0 0 auto; /* 要素が縮まないようにする */
 }
-@media screen and (max-width: 599px) {
-  .p_recommend .list_area li {
-    width: calc(50% - 1rem);
-  }
-}
-.p_recommend .list_area li a {
+.p_recommend .x_scroll .list_area li a.r_list {
   transition: all 0.3s;
 }
-.p_recommend .list_area li:hover {
+.p_recommend .x_scroll .list_area li a.r_list:hover {
   opacity: 0.7;
 }
-.p_recommend .list_area li .img_box {
+.p_recommend .x_scroll .list_area li .img_box {
   padding-bottom: 15px;
   width: 220px;
-  height: 100%;
-  aspect-ratio: 1/1;
-  min-width: 0;
+  height: 220px;
+  border-radius: 20px;
+  overflow: hidden;
 }
-@media screen and (max-width: 599px) {
-  .p_recommend .list_area li .img_box {
-    width: 100%;
-  }
-}
-.p_recommend .list_area li .img_box img {
+.p_recommend .x_scroll .list_area li .img_box img {
   border-radius: 20px;
   width: 100%;
+  height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
   -o-object-position: center;
      object-position: center;
 }
-.p_recommend .list_area li .cate_name {
+.p_recommend .x_scroll .list_area li .cate_name {
   font-size: 1.5rem;
   color: #FFA800;
   padding-bottom: 15px;
 }
 @media screen and (max-width: 599px) {
-  .p_recommend .list_area li .cate_name {
+  .p_recommend .x_scroll .list_area li .cate_name {
     font-size: 1.3rem;
     padding-bottom: 8px;
   }
 }
-.p_recommend .list_area li .item_text {
+.p_recommend .x_scroll .list_area li .item_text {
   font-size: 1.6rem;
   padding-bottom: 20px;
+  line-height: 1.5;
+  word-wrap: break-word; /* 追加 */
+  overflow-wrap: break-word; /* 追加 */
+  white-space: normal; /* 折り返しを有効にする */
 }
 @media screen and (max-width: 599px) {
-  .p_recommend .list_area li .item_text {
+  .p_recommend .x_scroll .list_area li .item_text {
     font-size: 1.4rem;
     padding-bottom: 10px;
   }
-}
-.p_recommend .list_area li .recommend_btn {
-  width: 220px;
-  height: 43px;
-  font-size: 1.6rem;
-}
-.p_recommend .list_area li .recommend_btn a {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  background-color: #fff;
-  border-radius: 100vh;
-  transition: all 0.3s;
-  padding: 9px 10px 9px 20px;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-}
-.p_recommend .list_area li .recommend_btn a svg {
-  width: 25px;
-  height: auto;
-}
-.p_recommend .list_area li .recommend_btn a svg .cls-1 {
-  transition: all 0.3s;
-}
-.p_recommend .list_area li .recommend_btn a:hover {
-  color: #fff;
-  background-color: #010642;
-}
-.p_recommend .list_area li .recommend_btn a:hover .cls-1 {
-  fill: #fff;
-}
-.p_recommend .list_wrap {
-  margin-bottom: 80px;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: flex-start !important;
-  align-items: baseline;
-}
-@media screen and (max-width: 599px) {
-  .p_recommend .list_wrap li {
-    width: calc(50% - 1rem);
-  }
-}
-.p_recommend .list_wrap li a {
-  transition: all 0.3s;
-}
-.p_recommend .list_wrap li:hover {
-  opacity: 0.7;
 }
 
 /*************************************************

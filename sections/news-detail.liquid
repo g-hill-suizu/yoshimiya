@@ -10,8 +10,12 @@
             <p class="date">{{ article.published_at | date: "%Y.%m.%d" }}</p>
         </div>
         <div class="news-details_content">
-            {{ article.content }}
+            {% comment %} {{ article.content }} {% endcomment %}
+            {% assign content = article.content %}
+            {% assign updated_content = content | replace: '_480x480.', '_1200x490.' %}
+            {{ updated_content }}
         </div>
+
         <div class="btn underpage_btn news_btn fadeInTriger">
             <a href="{{ blog.url }}" class="btn_txt">
                 <svg id="layer" data-name="layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.39 5.33">
