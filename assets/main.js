@@ -56,6 +56,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
     allowTouchMove: false, // マウスでのスワイプを禁止
   });
 
+    // 記事スライダー
+    const swiperContainer = document.querySelector(".swiper02");
+    const swiperSlides = swiperContainer.querySelectorAll(".swiper-slide");
+
   const swiper02 = new Swiper(".swiper02", {
     loop: swiperSlides.length > 1, // スライド数が2以上の時のみループ
     slidesPerView: 3,

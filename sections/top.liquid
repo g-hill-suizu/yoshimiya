@@ -157,7 +157,7 @@
                     var addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
                     addToCartButtons.forEach(function(button) {
                         button.addEventListener('click', function() {
-                            var variantId = this.getAttribute('data-variant-id');
+                            var variantId = this.getAttribute('data-product-id');
                             var quantity = 1; // ここで数量を設定、または入力から取得する
                             fetch('/cart/add.js', {
                                 method: 'POST',
@@ -165,10 +165,8 @@
                                     'Content-Type': 'application/json'
                                 },
                                 body: JSON.stringify({
-                                    items: [{
                                         id: variantId,
                                         quantity: quantity
-                                    }]
                                 })
                             })
                             .then(response => response.json())
@@ -371,7 +369,7 @@
                     <div class="swiper-wrapper">
                         {% assign blog_handle = 'news' %}
                         {% assign latest_posts = blogs[blog_handle].articles | slice: 0, 5 %}
-                        
+
                         {% if latest_posts.size > 1 %}
                         {% for article in latest_posts %}
                         <div class="swiper-slide">
