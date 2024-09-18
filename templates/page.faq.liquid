@@ -71,11 +71,11 @@
                     </summary>
                     <div class="answer js-answer">
                         <div class="answer_inner">
-                        <p>当店では、クレジットカード・代金引換・銀行振込をご利用いただけます。</p>
-                        <p class="pt30">【銀行振込の場合】</p>
+                        <p>当店では、クレジットカード・代金引換をご利用いただけます。</p>
+                        <!--<p class="pt30">【銀行振込の場合】</p>
                         <p>ご注文日を含む10日以内に下記口座にご入金をお願いします。</p>
                         <p>コザ信用金庫&emsp;普天間支店&emsp;140751
-                            <br>(有)良味屋</p>
+                            <br>(有)良味屋</p>-->
                         </div>
                     </div>
                     </details>
@@ -148,13 +148,12 @@
                     <summary class="js-summary"><span class="summary_inner">送料はいくらですか？</span>
                     </summary>
                     <div class="answer js-answer">
-                        <div class="answer_inner change_red">
+                        <div class="answer_inner  {% comment %}change_red{% endcomment %}">
                         <ul>
-                            <li>北海道・東北地方&emsp;1,500円</li>
-                            <li>信越・北陸・関東・東海・近畿・四国・中国&emsp;1,000円</li>
-                            <li>九州・沖縄&emsp;500円</li>
+                            <li>沖縄県外&emsp;1,300円</li>
+                            <li>沖縄県内&emsp;800円</li>
                         </ul>
-                        <p>※１回のご注文金額が商品代金5,000円（税込）以上の場合、全国無料配送になります。</p>
+                        {% comment %}<p>※１回のご注文金額が商品代金5,000円（税込）以上の場合、全国無料配送になります。</p>{% endcomment %}
                         </div>
                     </div>
                     </details>
@@ -163,8 +162,8 @@
                     </summary>
                     <div class="answer js-answer">
                         <div class="answer_inner">
-                        <p>お届け日は、ご注文日の7日以降よりご希望の日時をお選びいただけます。
-                            お届け日を指定しない場合は、ご注文・決済完了後、土日祝日を除く5営業日以内に発送いたします。</p>
+                        <p>{% comment %}お届け日は、ご注文日の7日以降よりご希望の日時をお選びいただけます。
+                            お届け日を指定しない場合は、{% endcomment %}ご注文・決済完了後、土日祝日を除く5営業日以内に発送いたします。</p>
                         <p>※お急ぎの方は、お問合せフォームよりご相談ください。</p>
                         </div>
                     </div>
