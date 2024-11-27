@@ -2077,7 +2077,6 @@ top
 }
 .topics .topicswrapper .topics_wrap .myswiper_wrapper .swiper02 .swiper-wrapper .swiper-slide-active {
   width: 480px !important;
-  aspect-ratio: 16/9 !important;
   transform: scale(1);
 }
 @media screen and (max-width: 660px) {
