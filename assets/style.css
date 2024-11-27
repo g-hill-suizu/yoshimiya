@@ -2077,7 +2077,6 @@ top
 }
 .topics .topicswrapper .topics_wrap .myswiper_wrapper .swiper02 .swiper-wrapper .swiper-slide-active {
   width: 480px !important;
-  height: 100% !important;
   aspect-ratio: 16/9 !important;
   transform: scale(1);
 }
@@ -2094,7 +2093,7 @@ top
 }
 .topics .topicswrapper .topics_wrap .myswiper_wrapper .swiper02 .swiper-wrapper .swiper-slide-active .thumn-box {
   width: 480px !important;
-  height: 100% !important;
+  height: auto;
   aspect-ratio: 16/9 !important;
   border-radius: 10px;
 }
@@ -2111,7 +2110,7 @@ top
 }
 .topics .topicswrapper .topics_wrap .myswiper_wrapper .swiper02 .swiper-wrapper .swiper-slide-active .thumn-box img {
   width: 100% !important;
-  height: 100% !important;
+  height: auto;
   -o-object-fit: cover !important;
      object-fit: cover !important;
   -o-object-position: center !important;
@@ -2120,7 +2119,7 @@ top
 @media screen and (max-width: 599px) {
   .topics .topicswrapper .topics_wrap .myswiper_wrapper .swiper02 .swiper-wrapper .swiper-slide-active .thumn-box img {
     width: 100% !important;
-    height: 100%;
+    height: auto;
     -o-object-fit: cover;
        object-fit: cover;
     -o-object-position: center;
