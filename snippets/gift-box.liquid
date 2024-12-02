@@ -46,60 +46,61 @@
             });
         }
     
-        // Shopify.Cart.GiftBox.remove = function() {
-        //     var headers = new Headers({ 'Content-Type': 'application/json' });
-        //     var request = {
-        //         method: 'POST',
-        //         headers: headers,
-        //         body: JSON.stringify({ updates: { {{ id }}: 0 }, attributes: { 'ギフトボックス': '', 'ギフトボックスメッセージ': '' } })
-        //     };
-        //     fetch('/cart/update.js', request).then(function() {
-        //         location.href = '/cart';
-        //     });
-        // }
+        Shopify.Cart.GiftBox.remove = function() {
+            var headers = new Headers({ 'Content-Type': 'application/json' });
+            var request = {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify({ updates: { {{ id }}: 0 }, attributes: { 'ギフトボックス': '', 'ギフトボックスメッセージ': '' } })
+            };
+            fetch('/cart/update.js', request).then(function() {
+                location.href = '/cart';
+            });
+        };
     
         // If we have nothing but gift-box items in the cart.
-        {% if cart.items.size == 1 and box_wraps_in_cart > 0 %}
-        document.addEventListener("DOMContentLoaded", function(){
-            Shopify.Cart.GiftBox.remove();
-        });
-        // If we have more than one gift-box item in the cart.
-        {% elsif box_wraps_in_cart > 1 %}
-        document.addEventListener("DOMContentLoaded", function(){
-            Shopify.Cart.GiftBox.set();
-        });
-        // If we have a gift-box item in the cart but our gift-box cart attribute has not been set.
-        {% elsif box_wraps_in_cart > 0 and cart.attributes['ギフトボックス'] == blank %}
-        document.addEventListener("DOMContentLoaded", function(){
-            Shopify.Cart.GiftBox.set();
-        });
-        // If we have no gift-box item in the cart but our gift-box cart attribute has been set.
-        {% elsif box_wraps_in_cart == 0 and cart.attributes['ギフトボックス'] != blank %}
-        document.addEventListener("DOMContentLoaded", function(){
-            Shopify.Cart.GiftBox.set();
-        });
+        // {% if cart.items.size == 1 and box_wraps_in_cart > 0 %}
+        // document.addEventListener("DOMContentLoaded", function(){
+        //     Shopify.Cart.GiftBox.remove();
+        // });
+        // // If we have more than one gift-box item in the cart.
+        // {% elsif box_wraps_in_cart > 1 %}
+        // document.addEventListener("DOMContentLoaded", function(){
+        //     Shopify.Cart.GiftBox.set();
+        // });
+        // // If we have a gift-box item in the cart but our gift-box cart attribute has not been set.
+        // {% elsif box_wraps_in_cart > 0 and cart.attributes['ギフトボックス'] == blank %}
+        // document.addEventListener("DOMContentLoaded", function(){
+        //     Shopify.Cart.GiftBox.set();
+        // });
+        // // If we have no gift-box item in the cart but our gift-box cart attribute has been set.
+        // {% elsif box_wraps_in_cart == 0 and cart.attributes['ギフトボックス'] != blank %}
+        // document.addEventListener("DOMContentLoaded", function(){
+        //     Shopify.Cart.GiftBox.set();
+        // });
+        // {% endif %}
+        {% if box_wraps_in_cart > 0 and cart.attributes['ギフトボックス'] == blank %}
+            document.addEventListener("DOMContentLoaded", function(){
+                Shopify.Cart.GiftBox.set();
+            });
+            {% elsif box_wraps_in_cart == 0 and cart.attributes['ギフトボックス'] == 'yes' %}
+            document.addEventListener("DOMContentLoaded", function(){
+                Shopify.Cart.GiftBox.set();
+            });
         {% endif %}
     
         // When the gift-box checkbox is checked or unchecked.
         document.addEventListener("DOMContentLoaded", function(){
-            document.querySelector('[name="attributes[ギフトボックス]"]').addEventListener("change", function(event) {
-                if (event.target.checked) {
-                    Shopify.Cart.GiftBox.set();
-                } else {
-                    Shopify.Cart.GiftBox.remove();
-                }
-            });
-    
-            // document.querySelector('#gift-box-note').addEventListener("change", function(evt) {
-            //     var note = evt.target.value;
-            //     var headers = new Headers({ 'Content-Type': 'application/json' });
-            //     var request = {
-            //         method: 'POST',
-            //         headers: headers,
-            //         body: JSON.stringify({ attributes: { 'ギフトボックスメッセージ': note } })
-            //     };
-            //     fetch('/cart/update.js', request);
-            // });
+            const giftBoxCheckbox = document.querySelector('[name="attributes[ギフトボックス]"]');
+            if (giftBoxCheckbox) {
+                giftBoxCheckbox.addEventListener("change", function(event) {
+                    if (event.target.checked) {
+                        Shopify.Cart.GiftBox.set();
+                    } else {
+                        Shopify.Cart.GiftBox.remove();
+                    }
+                });
+            }
         });
     </script>
     

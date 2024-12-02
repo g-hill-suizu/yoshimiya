@@ -46,17 +46,17 @@
             });
         }
     
-        // Shopify.Cart.GiftWrap.remove = function() {
-        //     var headers = new Headers({ 'Content-Type': 'application/json' });
-        //     var request = {
-        //         method: 'POST',
-        //         headers: headers,
-        //         body: JSON.stringify({ updates: { {{ id }}: 0 }, attributes: { 'ギフトラッピング(簡易包装)': '', 'メッセージ': '' } })
-        //     };
-        //     fetch('/cart/update.js', request).then(function() {
-        //         location.href = '/cart';
-        //     });
-        // }
+        Shopify.Cart.GiftWrap.remove = function() {
+            var headers = new Headers({ 'Content-Type': 'application/json' });
+            var request = {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify({ updates: { {{ id }}: 0 }, attributes: { 'ギフトラッピング(簡易包装)': '', 'メッセージ': '' } })
+            };
+            fetch('/cart/update.js', request).then(function() {
+                location.href = '/cart';
+            });
+        }
     
         // If we have nothing but gift-wrap items in the cart.
         {% if cart.items.size == 1 and gift_wraps_in_cart > 0 %}
@@ -82,13 +82,13 @@
     
         // When the gift-wrapping checkbox is checked or unchecked.
         document.addEventListener("DOMContentLoaded", function(){
-            document.querySelector('[name="attributes[ギフトラッピング(簡易包装)]"]').addEventListener("change", function(event) {
-                if (event.target.checked) {
-                    Shopify.Cart.GiftWrap.set();
-                } else {
-                    Shopify.Cart.GiftWrap.remove();
-                }
-            });
+            // document.querySelector('[name="attributes[ギフトラッピング(簡易包装)]"]').addEventListener("change", function(event) {
+            //     if (event.target.checked) {
+            //         Shopify.Cart.GiftWrap.set();
+            //     } else {
+            //         Shopify.Cart.GiftWrap.remove();
+            //     }
+            // });
     
             // document.querySelector('#gift-note').addEventListener("change", function(evt) {
             //     var note = evt.target.value;
@@ -100,7 +100,17 @@
             //     };
             //     fetch('/cart/update.js', request);
             // });
-        });
+            const giftWrapCheckbox = document.querySelector('[name="attributes[ギフトラッピング(簡易包装)]"]');
+                if (giftWrapCheckbox) {
+                    giftWrapCheckbox.addEventListener("change", function(event) {
+                        if (event.target.checked) {
+                            Shopify.Cart.GiftWrap.set();
+                        } else {
+                            Shopify.Cart.GiftWrap.remove();
+                        }
+                    });
+                }
+            });
     </script>
     
     {% else %}
